@@ -2,63 +2,59 @@ package com.example.freshup.Fragments;
 
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
-import com.example.freshup.Adapters.HomePagerAdapter;
+
 import com.example.freshup.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class HomeFragment extends Fragment {
-    TabLayout tabLayout;
-    ViewPager viewPager;
-
+    Button services,products;
 
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_home, container, false);
-        tabLayout=view.findViewById(R.id.tabs);
-        viewPager=view.findViewById(R.id.home_pager);
-
-        viewPager.setAdapter(new HomePagerAdapter(getFragmentManager()));
-
-        tabLayout.addTab(tabLayout.newTab().setText("Services"));
-        tabLayout.addTab(tabLayout.newTab().setText("Products"));
-        tabLayout.setTabGravity(tabLayout.GRAVITY_FILL);
-
-        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        SelectFragment(new ServicesFragment());
+        services=view.findViewById(R.id.services_button);
+        products=view.findViewById(R.id.products_button);
+        services.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public void onClick(View v) {
+                SelectFragment(new ServicesFragment());
             }
         });
 
-        return view;
-    }
+        products.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelectFragment(new ProductsFragment());
+            }
+        });
 
+
+
+        return view;
+
+
+    }
+    private void SelectFragment(Fragment fragment) {
+        FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction=fragmentManager.beginTransaction();
+        transaction.replace(R.id.serv_prod_frag,fragment);
+        transaction.commit();
+
+    }
 }

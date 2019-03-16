@@ -8,20 +8,26 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.freshup.Fragments.HomeFragment;
+import com.example.freshup.Fragments.ProductsFragment;
 import com.example.freshup.Fragments.ProfileFragment;
 import com.example.freshup.Fragments.PromoFragment;
+import com.example.freshup.Fragments.ServicesFragment;
 import com.example.freshup.R;
 import com.example.freshup.Fragments.SettingsFragment;
 
 public class NavigatorActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
+    Button services,products;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigator);
+
 
         SelectFragment(new HomeFragment());
         navigationView=findViewById(R.id.bottom_navigator);
@@ -55,6 +61,7 @@ public class NavigatorActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
     private void SelectFragment(Fragment fragment) {
         FragmentManager fragmentManager=getSupportFragmentManager();
@@ -63,4 +70,5 @@ public class NavigatorActivity extends AppCompatActivity {
         transaction.commit();
 
     }
+
 }
