@@ -14,28 +14,34 @@
         android:layout_marginTop="20dp"
         android:id="@+id/logo_home"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/logo_home"
-        android:layout_marginTop="20dp"
-        android:text="Services"
-        android:textSize="20sp"
-        android:id="@+id/services_button"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/logo_home"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:layout_alignParentRight="true"
-        android:text="Products"
-        android:id="@+id/products_button" />
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/linear_layout"
+       android:layout_below="@+id/logo_home"
+       android:layout_marginTop="20dp"
+       android:weightSum="2">
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Services"
+           android:layout_weight="1"
+           android:textSize="20sp"
+           android:id="@+id/services_button"/>
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="20sp"
+           android:text="Products"
+           android:layout_weight="1"
+           android:id="@+id/products_button" />
+
+   </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/products_button"
+        android:layout_below="@+id/linear_layout"
         android:id="@+id/serv_prod_frag"/>
 
 
