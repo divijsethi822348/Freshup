@@ -20,18 +20,21 @@
        android:id="@+id/linear_layout"
        android:layout_below="@+id/logo_home"
        android:layout_marginTop="20dp"
-       android:weightSum="2">
+       android:weightSum="2"
+       android:orientation="horizontal">
        <Button
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="Services"
            android:layout_weight="1"
-           android:textSize="20sp"
+           android:background="@color/white"
+           android:textColor="#000"
            android:id="@+id/services_button"/>
        <Button
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:textSize="20sp"
+           android:background="#000"
+           android:textColor="@color/white"
            android:text="Products"
            android:layout_weight="1"
            android:id="@+id/products_button" />

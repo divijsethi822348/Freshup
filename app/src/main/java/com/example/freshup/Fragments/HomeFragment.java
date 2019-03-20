@@ -1,6 +1,7 @@
 package com.example.freshup.Fragments;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,8 @@ import com.example.freshup.R;
 
 public class HomeFragment extends Fragment {
     Button services,products;
+    int color = Color.WHITE;
+    int color2=Color.BLACK;
 
     public HomeFragment() {
 
@@ -33,6 +36,10 @@ public class HomeFragment extends Fragment {
         services.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                products.setBackgroundColor(color2);
+                products.setTextColor(color);
+                services.setBackgroundColor(color);
+                services.setTextColor(color2);
                 SelectFragment(new ServicesFragment());
             }
         });
@@ -40,7 +47,13 @@ public class HomeFragment extends Fragment {
         products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                services.setTextColor(color);
+                services.setBackgroundColor(color2);
+                products.setTextColor(color2);
+                products.setBackgroundColor(color);
+
                 SelectFragment(new ProductsFragment());
+
             }
         });
 
