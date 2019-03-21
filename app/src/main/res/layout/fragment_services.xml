@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="35sp"
+        android:layout_marginTop="35dp"
         android:elevation="10sp"
         android:id="@+id/hair_cutting"
         app:cardCornerRadius="20dp"
