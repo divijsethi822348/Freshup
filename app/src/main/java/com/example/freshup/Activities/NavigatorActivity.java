@@ -1,6 +1,5 @@
 package com.example.freshup.Activities;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -9,27 +8,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
 
+import com.example.freshup.Fragments.AppointFragment;
+import com.example.freshup.Fragments.CartFragment;
 import com.example.freshup.Fragments.HomeFragment;
-import com.example.freshup.Fragments.ProductsFragment;
-import com.example.freshup.Fragments.ProfileFragment;
-import com.example.freshup.Fragments.PromoFragment;
-import com.example.freshup.Fragments.ServicesFragment;
+import com.example.freshup.Fragments.OrdersFragment;
 import com.example.freshup.R;
-import com.example.freshup.Fragments.SettingsFragment;
 
 public class NavigatorActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
-    Button services,products;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigator);
-
 
 
         SelectFragment(new HomeFragment());
@@ -45,18 +37,18 @@ public class NavigatorActivity extends AppCompatActivity {
                         SelectFragment(new HomeFragment());
                         break;
 
-                    case R.id.nav_promo:
-                        SelectFragment(new PromoFragment());
+                    case R.id.nav_cart:
+                        SelectFragment(new CartFragment());
 //                        selectedFragment=new Tab2();
                         break;
 
-                    case R.id.nav_profile:
-                        SelectFragment(new ProfileFragment());
+                    case R.id.nav_orders:
+                        SelectFragment(new OrdersFragment());
 //                        selectedFragment=new Tab3();
                         break;
 
-                    case R.id.nav_settings:
-                        SelectFragment(new SettingsFragment());
+                    case R.id.nav_appoint:
+                        SelectFragment(new AppointFragment());
 //                        selectedFragment=new Tab3();
                         break;
                 }
@@ -64,6 +56,8 @@ public class NavigatorActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
 
     }
     private void SelectFragment(Fragment fragment) {
@@ -73,5 +67,6 @@ public class NavigatorActivity extends AppCompatActivity {
         transaction.commit();
 
     }
+
 
 }

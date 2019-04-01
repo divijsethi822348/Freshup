@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ProduitsCapilaire">
+
+    <ImageView
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/face_products_background_"
+        android:scaleType="fitXY"/>
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:id="@+id/produits_capilaire_image"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/face_products_"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PRODUITS CAPILARE"
+        android:textSize="15dp"
+        android:id="@+id/produits_capilaire_text"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:layout_below="@+id/produits_capilaire_image"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_below="@+id/produits_capilaire_text"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="70sp"
+        android:layout_centerHorizontal="true"
+        android:elevation="20dp"
+        app:cardCornerRadius="20sp">
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="130dp"
+            android:layout_height="161dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:id="@+id/p1"
+                    android:layout_marginTop="30dp"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/profile"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="face items"
+                    android:textSize="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
+                    android:layout_below="@+id/p1"
+                    android:textColor="#000"
+                    android:layout_marginTop="30sp"/>
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

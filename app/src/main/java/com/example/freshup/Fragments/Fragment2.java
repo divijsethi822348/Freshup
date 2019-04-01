@@ -16,6 +16,7 @@ import com.example.freshup.R;
 public class Fragment2 extends Fragment {
 
 
+
     public Fragment2() {
         // Required empty public constructor
     }

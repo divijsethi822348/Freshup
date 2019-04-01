@@ -11,6 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activities.ProduitsCapilaire"></activity>
+        <activity android:name=".Activities.SnekersActivity" />
+        <activity android:name=".Activities.VetementsActivity" />
+        <activity android:name=".Activities.JoinQueueActivity" />
+        <activity android:name=".Activities.PresentationsActivity" />
+        <activity android:name=".Activities.ChangePassActivity" />
+        <activity android:name=".Activities.SettingsActivity" />
+        <activity android:name=".Activities.Profile" />
         <activity android:name=".Activities.NavigatorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +29,7 @@
         <activity android:name=".Activities.OtpVerification" />
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.MainActivity">
-
-        </activity>
+        <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.About" />
     </application>
 

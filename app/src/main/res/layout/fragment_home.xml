@@ -9,6 +9,23 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/profile"
+        android:id="@+id/profile_edit"
+        android:layout_marginTop="10sp"
+        android:layout_marginLeft="10sp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/settings_"
+        android:id="@+id/settings"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10sp"
+        android:layout_marginTop="10sp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/logo_black"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
@@ -41,11 +58,20 @@
 
    </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/linear_layout"
-        android:id="@+id/serv_prod_frag" />
+   <android.support.v4.widget.NestedScrollView
+       android:layout_width="match_parent"
+       android:layout_height="fill_parent"
+       android:layout_below="@+id/linear_layout">
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="fill_parent"
+               android:id="@+id/serv_prod_frag" />
+       </RelativeLayout>
+
+   </android.support.v4.widget.NestedScrollView>
 
 
 

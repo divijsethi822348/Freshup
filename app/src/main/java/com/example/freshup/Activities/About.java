@@ -1,6 +1,7 @@
 package com.example.freshup.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class About extends AppCompatActivity {
         viewPager=findViewById(R.id.viewpager);
         PagerAdapter adapter=new PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
-//        addDotsIndicator(1);
+        addDotsIndicator(0);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -34,14 +35,14 @@ public class About extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 addDotsIndicator(i);
-                if (i==2){
-                    Thread thread=new Thread(){
+                if(i==2) {
+                    Thread thread = new Thread() {
                         @Override
                         public void run() {
                             super.run();
                             try {
                                 this.sleep(3000);
-                                Intent intent=new Intent(About.this, LoginActivity.class);
+                                Intent intent = new Intent(About.this, LoginActivity.class);
                                 startActivity(intent);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
@@ -65,12 +66,12 @@ public class About extends AppCompatActivity {
         dots.removeAllViews();
         for (int i = 0; i < tv_dots.length; i++) {
             tv_dots[i] = new TextView(getApplicationContext());
-            tv_dots[i].setText("•");
-            tv_dots[i].setTextSize(35);
-            tv_dots[i].setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            tv_dots[i].setText(" -");
+            tv_dots[i].setTextSize(40);
+            tv_dots[i].setTextColor(getResources().getColor(R.color.grey));
             dots.addView(tv_dots[i]);
         }
 
-        tv_dots[position].setTextColor(getResources().getColor(R.color.colorAccent));
+        tv_dots[position].setTextColor(Color.parseColor("#000000"));
     }
 }
