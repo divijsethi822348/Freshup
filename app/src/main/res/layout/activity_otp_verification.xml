@@ -20,118 +20,126 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60sp"
         android:id="@+id/logo"/>
-    <android.support.v7.widget.CardView
-        android:layout_width="380dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="30sp"
-        android:clipToPadding="true"
-        android:elevation="10sp"
-        android:layout_below="@+id/logo"
-        app:cardCornerRadius="15sp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="VERIFICATION"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15sp"
-                android:textSize="30sp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="200dp">
+            <android.support.v7.widget.CardView
+                android:layout_width="380dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="30sp"
+                android:clipToPadding="true"
                 android:elevation="10sp"
-                android:textColor="#FFC107"
-                android:id="@+id/verification"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Enter your Verification Code"
-                android:layout_marginTop="60sp"
-                android:textColor="#000"
-                android:layout_below="@+id/verification"
+                app:cardCornerRadius="15sp"
                 android:layout_centerHorizontal="true"
-                android:textSize="15sp"
-                android:id="@+id/tvcode"/>
+                android:layout_centerInParent="true">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="VERIFICATION"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15sp"
+                        android:textSize="30sp"
+                        android:elevation="10sp"
+                        android:textColor="#FFC107"
+                        android:id="@+id/verification"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enter your Verification Code"
+                        android:layout_marginTop="60sp"
+                        android:textColor="#000"
+                        android:layout_below="@+id/verification"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="15sp"
+                        android:id="@+id/tvcode"/>
 
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/otp1"
-                    android:textAlignment="center"
-                    android:textSize="30sp"
-                    android:layout_marginLeft="90sp"
-                    android:layout_below="@+id/tvcode"
-                    android:layout_marginTop="20sp"
-                    android:textColor="#FFC107"
-                    android:background="@drawable/otp_edittext"
-                    android:elevation="10sp"
-                    android:inputType="number" />
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/otp_edittext"
-                    android:id="@+id/otp2"
-                    android:textAlignment="center"
-                    android:textSize="30sp"
-                    android:layout_marginLeft="20sp"
-                    android:layout_toRightOf="@+id/otp1"
-                    android:layout_below="@+id/tvcode"
-                    android:layout_marginTop="20sp"
-                    android:elevation="10sp"
-                    android:textColor="#FFC107"
-                    android:inputType="number"/>
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/otp1"
+                        android:textAlignment="center"
+                        android:textSize="30sp"
+                        android:layout_marginLeft="90sp"
+                        android:layout_below="@+id/tvcode"
+                        android:layout_marginTop="20sp"
+                        android:textColor="#FFC107"
+                        android:background="@drawable/otp_edittext"
+                        android:elevation="10sp"
+                        android:inputType="number" />
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/otp_edittext"
+                        android:id="@+id/otp2"
+                        android:textAlignment="center"
+                        android:textSize="30sp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_toRightOf="@+id/otp1"
+                        android:layout_below="@+id/tvcode"
+                        android:layout_marginTop="20sp"
+                        android:elevation="10sp"
+                        android:textColor="#FFC107"
+                        android:inputType="number"/>
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/otp_edittext"
-                    android:id="@+id/otp3"
-                    android:elevation="10sp"
-                    android:textAlignment="center"
-                    android:textSize="30sp"
-                    android:layout_marginLeft="20sp"
-                    android:layout_toRightOf="@+id/otp2"
-                    android:layout_below="@+id/tvcode"
-                    android:layout_marginTop="20sp"
-                    android:textColor="#FFC107"
-                    android:inputType="number"/>
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/otp_edittext"
+                        android:id="@+id/otp3"
+                        android:elevation="10sp"
+                        android:textAlignment="center"
+                        android:textSize="30sp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_toRightOf="@+id/otp2"
+                        android:layout_below="@+id/tvcode"
+                        android:layout_marginTop="20sp"
+                        android:textColor="#FFC107"
+                        android:inputType="number"/>
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/otp_edittext"
-                    android:layout_marginLeft="20sp"
-                    android:textAlignment="center"
-                    android:textSize="30sp"
-                    android:layout_toRightOf="@+id/otp3"
-                    android:layout_below="@+id/tvcode"
-                    android:layout_marginTop="20sp"
-                    android:id="@+id/otp4"
-                    android:elevation="10sp"
-                    android:textColor="#FFC107"
-                    android:inputType="number"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="80sp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20sp"
-                android:background="@drawable/rectangle_button"
-                android:layout_alignParentBottom="true"
-                android:text="verify"
-                android:textSize="20sp"
-                android:layout_marginBottom="30sp"
-                android:id="@+id/verify_button"
-                android:onClick="verify"
-                android:textColor="#F7F6F6"/>
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/otp_edittext"
+                        android:layout_marginLeft="20sp"
+                        android:textAlignment="center"
+                        android:textSize="30sp"
+                        android:layout_toRightOf="@+id/otp3"
+                        android:layout_below="@+id/tvcode"
+                        android:layout_marginTop="20sp"
+                        android:id="@+id/otp4"
+                        android:elevation="10sp"
+                        android:textColor="#FFC107"
+                        android:inputType="number"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20sp"
+                        android:background="@drawable/rectangle_button"
+                        android:layout_alignParentBottom="true"
+                        android:text="verify"
+                        android:textSize="20sp"
+                        android:layout_marginBottom="30sp"
+                        android:id="@+id/verify_button"
+                        android:onClick="verify"
+                        android:textColor="#F7F6F6"/>
 
-            
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
         </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
+    </android.support.v4.widget.NestedScrollView>
 
 </RelativeLayout>
