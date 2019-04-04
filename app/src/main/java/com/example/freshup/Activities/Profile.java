@@ -46,6 +46,7 @@ public class Profile extends AppCompatActivity {
         profileedit=findViewById(R.id.profile_edit);
         profilesave=findViewById(R.id.profile_save);
         profilepic=findViewById(R.id.change_pic);
+        profilepic.setEnabled(false);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +62,7 @@ public class Profile extends AppCompatActivity {
                 phone.setEnabled(true);
                 profilesave.setVisibility(View.VISIBLE);
                 profileedit.setVisibility(View.GONE);
+                profilepic.setEnabled(true);
             }
         });
         profilesave.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +73,7 @@ public class Profile extends AppCompatActivity {
                 phone.setEnabled(false);
                 profileedit.setVisibility(View.VISIBLE);
                 profilesave.setVisibility(View.GONE);
+                profilepic.setEnabled(false);
             }
         });
         profilepic.setOnClickListener(new View.OnClickListener() {
