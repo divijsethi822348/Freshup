@@ -5,29 +5,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="20dp"
         android:id="@+id/expand_card"
-        app:cardCornerRadius="10dp">
+        android:layout_marginTop="10sp"
+        android:layout_marginBottom="10sp"
+        android:background="@drawable/detailbox">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="50sp"
                 android:layout_gravity="center"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textColor="#BB8C09"
+                    android:textColor="#A58F54"
                     android:id="@+id/services_type_text_view"
                     android:hint="hello"
-                    android:textSize="20dp"
+                    android:textSize="12dp"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="10dp"
                     />
@@ -36,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/arrow_"
+                    android:src="@drawable/arrow_down"
                     android:layout_marginRight="10dp"
                     android:id="@+id/btn_expand"
 
@@ -50,6 +51,6 @@
 
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 </RelativeLayout>

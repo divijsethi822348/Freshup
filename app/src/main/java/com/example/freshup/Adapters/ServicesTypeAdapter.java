@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +35,8 @@ public class ServicesTypeAdapter extends RecyclerView.Adapter<ServicesTypeAdapte
     public ServicesTypeAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.services_type_recycler_item,viewGroup,false);
         list2=new ArrayList<>();
-        list2.add("coupe+barbe");
-        list2.add("coupe sample");
+        list2.add("COUPE+BARBE");
+        list2.add("COUPE SAMPLE");
         return new MyViewHolder(view);
     }
 
@@ -56,7 +57,7 @@ public class ServicesTypeAdapter extends RecyclerView.Adapter<ServicesTypeAdapte
         TextView services_type;
         ImageView expand;
         RecyclerView expanded_recycler;
-        CardView expand_card;
+        LinearLayout expand_card;
         Boolean expanded=false;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,10 +73,12 @@ public class ServicesTypeAdapter extends RecyclerView.Adapter<ServicesTypeAdapte
                     if (expanded==false){
                         expanded_recycler.setVisibility(View.VISIBLE);
                         expanded=true;
+                        expand.setImageResource(R.drawable.arrow_up);
                     }
                     else if (expanded==true){
                         expanded_recycler.setVisibility(View.GONE);
                         expanded=false;
+                        expand.setImageResource(R.drawable.arrow_down);
 
                     }
 

@@ -20,8 +20,8 @@ public class PresentationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_presentations);
         services_type=findViewById(R.id.services_type);
-        list.add("Coupes");
-        list.add("Coloration");
+        list.add("COUPES");
+        list.add("COLORATION");
         services_type.setLayoutManager(new LinearLayoutManager(this));
         services_type.setAdapter(new ServicesTypeAdapter(this,list));
 
