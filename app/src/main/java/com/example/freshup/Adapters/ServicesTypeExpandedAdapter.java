@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.freshup.R;
@@ -42,9 +43,27 @@ public class ServicesTypeExpandedAdapter extends RecyclerView.Adapter<ServicesTy
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView services_type_expanded_recycler_item_text_view;
+        ImageView radio;
+        public Boolean status=false;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             services_type_expanded_recycler_item_text_view=itemView.findViewById(R.id.rservices_type_expanded_recycler_item_text_view);
+            radio=itemView.findViewById(R.id.radio);
+            radio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (status==false){
+                        radio.setImageResource(R.drawable.ic_radio_on_button);
+                        status=true;
+                    }
+                    else if (status==true){
+                        radio.setImageResource(R.drawable.ic_circle_shape_outline);
+                        status=false;
+                    }
+
+                }
+            });
         }
     }
 }

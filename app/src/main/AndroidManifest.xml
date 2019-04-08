@@ -20,7 +20,11 @@
         <activity android:name=".Activities.JoinQueueActivity" />
         <activity android:name=".Activities.PresentationsActivity" >
 
-        </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>        </activity>
         <activity android:name=".Activities.ChangePassActivity" />
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.Profile" >
@@ -33,11 +37,7 @@
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activities.About" />
     </application>
