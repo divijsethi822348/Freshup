@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.freshup">
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,31 +15,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activities.ProduitsCapilaire"></activity>
+        <activity android:name=".Activities.BookSlotActivity"></activity>
+        <activity android:name=".Activities.ProduitsCapilaire" />
         <activity android:name=".Activities.SnekersActivity" />
         <activity android:name=".Activities.VetementsActivity" />
         <activity android:name=".Activities.JoinQueueActivity" />
-        <activity android:name=".Activities.PresentationsActivity" >
-
+        <activity android:name=".Activities.PresentationsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>        </activity>
+            </intent-filter>
+        </activity>
         <activity android:name=".Activities.ChangePassActivity" />
         <activity android:name=".Activities.SettingsActivity" />
-        <activity android:name=".Activities.Profile" >
-
-        </activity>
-        <activity android:name=".Activities.NavigatorActivity">
-
-        </activity>
+        <activity android:name=".Activities.Profile"></activity>
+        <activity android:name=".Activities.NavigatorActivity"></activity>
         <activity android:name=".Activities.OtpVerification" />
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.MainActivity" >
-
-        </activity>
+        <activity android:name=".Activities.MainActivity"></activity>
         <activity android:name=".Activities.About" />
     </application>
 
