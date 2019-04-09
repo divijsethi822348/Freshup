@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.freshup.Common;
 import com.example.freshup.Login_Logout;
@@ -42,15 +43,20 @@ public class LoginActivity extends AppCompatActivity {
         String Email=email.getText().toString();
         String Password=password.getText().toString();
 
-        viewModel.login(LoginActivity.this,Email,Password,"Android","0").observe(LoginActivity.this, new Observer<GetProfilePojo>() {
-            @Override
-            public void onChanged(@Nullable GetProfilePojo getProfilePojo) {
-                Login_Logout.SaveToken(LoginActivity.this);
-                Common.SaveToken(LoginActivity.this,"ID",getProfilePojo.getDetails().getId().toString());
-                Intent intent=new Intent(LoginActivity.this,NavigatorActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (Email!="" && Password!=""){
+            viewModel.login(LoginActivity.this,Email,Password,"Android","0").observe(LoginActivity.this, new Observer<GetProfilePojo>() {
+                @Override
+                public void onChanged(@Nullable GetProfilePojo getProfilePojo) {
+                    Login_Logout.SaveToken(LoginActivity.this);
+                    Common.SaveToken(LoginActivity.this,"ID",getProfilePojo.getDetails().getId().toString());
+                    Intent intent=new Intent(LoginActivity.this,NavigatorActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+        else if(Email!="" || Password!=""){
+            Toast.makeText(this, "You need to enter both email and password", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -59,5 +65,10 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(LoginActivity.this,About.class);
+        startActivity(intent);
+    }
 }

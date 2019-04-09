@@ -33,6 +33,7 @@ import android.widget.Toast;
 import com.example.freshup.Common;
 import com.example.freshup.Login_Logout;
 import com.example.freshup.Models.GetProfilePojo;
+import com.example.freshup.Picture_Path;
 import com.example.freshup.R;
 import com.example.freshup.ViewModels.UserRegisterViewModel;
 import com.squareup.picasso.Picasso;
@@ -52,12 +53,16 @@ public class Profile extends AppCompatActivity {
     TextView profilesave;
     String picturePath="",picturePath1="";
     String path="";
+    String Path="";
    private UserRegisterViewModel viewModel;
+   Boolean Changed;
+   String phoneold="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
         viewModel= ViewModelProviders.of(this).get(UserRegisterViewModel.class);
         logout=findViewById(R.id.logout_button);
         name=findViewById(R.id.name_et);
@@ -69,6 +74,7 @@ public class Profile extends AppCompatActivity {
         profilepic=findViewById(R.id.change_pic);
         profilepic.setEnabled(false);
         getProfile();
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,17 +87,20 @@ public class Profile extends AppCompatActivity {
         profileedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                phoneold=phone.getText().toString();
                 name.setEnabled(true);
                 phone.setEnabled(true);
                 profilesave.setVisibility(View.VISIBLE);
                 profileedit.setVisibility(View.GONE);
                 profilepic.setEnabled(true);
+                logout.setEnabled(false);
             }
         });
         profilesave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateProfile();
+                logout.setEnabled(true);
 
 
             }
@@ -126,33 +135,62 @@ public class Profile extends AppCompatActivity {
         p.setMessage("Uploading...");
         p.show();
 
-        if (picturePath==""){
+        if (Picture_Path.GetToken(Profile.this,"path").equalsIgnoreCase("1")){
+            Path=Picture_Path.GetToken(Profile.this,"path");
+
+        }else{
+            Path="";
+        }
+
+        if (picturePath=="" && picturePath1!=""){
             path=picturePath1;
-        }else if (picturePath1==""){
+        }else if (picturePath1==""&& picturePath!=""){
             path=picturePath;
         }
-        final File file=new File(path);
-
-        RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),file);
-        MultipartBody.Part image=MultipartBody.
-                Part.createFormData("image",file.getName(),requestBody);
-        RequestBody userId=RequestBody.create(MediaType.parse("text/plain"),Common.GetToken(Profile.this,"ID"));
-
-        RequestBody Name=RequestBody.create(MediaType.parse("text/plain"),name.getText().toString());
-        RequestBody Phone=RequestBody.create(MediaType.parse("text/plain"),phone.getText().toString());
+        else if (picturePath=="" && picturePath1==""){
+            path=Path;
+        }
 
 
-        viewModel.updateProfile(Profile.this,userId,Name,Phone,image).observe(Profile.this, new Observer<GetProfilePojo>() {
-            @Override
-            public void onChanged(@Nullable GetProfilePojo getProfilePojo) {
-                name.setEnabled(false);
-                phone.setEnabled(false);
-                profileedit.setVisibility(View.VISIBLE);
-                profilesave.setVisibility(View.GONE);
-                profilepic.setEnabled(false);
-                Toast.makeText(Profile.this, "Saved", Toast.LENGTH_SHORT).show();
-            }
-        });
+        Picture_Path.SaveToken(Profile.this,"path",path);
+        String check_phone=phone.getText().toString();
+
+        if (phoneold!=check_phone){
+            Changed=true;
+        }
+        else {
+            Changed=false;
+        }
+            final File file=new File(path);
+            RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),file);
+            MultipartBody.Part image=MultipartBody.
+                    Part.createFormData("image",file.getName(),requestBody);
+            RequestBody userId=RequestBody.create(MediaType.parse("text/plain"),Common.GetToken(Profile.this,"ID"));
+
+            RequestBody Name=RequestBody.create(MediaType.parse("text/plain"),name.getText().toString());
+            RequestBody Phone=RequestBody.create(MediaType.parse("text/plain"),phone.getText().toString());
+
+
+            viewModel.updateProfile(Profile.this,userId,Name,Phone,image).observe(Profile.this, new Observer<GetProfilePojo>() {
+                @Override
+                public void onChanged(@Nullable GetProfilePojo getProfilePojo) {
+
+                    name.setEnabled(false);
+                    phone.setEnabled(false);
+                    profileedit.setVisibility(View.VISIBLE);
+                    profilesave.setVisibility(View.GONE);
+                    profilepic.setEnabled(false);
+                    Toast.makeText(Profile.this, "Saved", Toast.LENGTH_SHORT).show();
+                    picturePath="";
+                    picturePath1="";
+                if (Changed==true){
+                    Toast.makeText(Profile.this, "Verify your number again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Profile.this, "Otp is : "+getProfilePojo.getDetails().getOtp(), Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(Profile.this,OtpVerification.class);
+                    startActivity(intent);
+                }
+                }
+            });
         p.dismiss();
 
     }
@@ -166,7 +204,9 @@ public class Profile extends AppCompatActivity {
                 name.setText(getProfilePojo.getDetails().getName());
                 email.setText(getProfilePojo.getDetails().getEmail());
                 phone.setText(getProfilePojo.getDetails().getPhone());
+
                 if (getProfilePojo.getDetails().getImage().isEmpty()){
+
                     Toast.makeText(Profile.this, "Add your image", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -310,5 +350,12 @@ public class Profile extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(Profile.this,NavigatorActivity.class);
+        startActivity(intent);
     }
 }

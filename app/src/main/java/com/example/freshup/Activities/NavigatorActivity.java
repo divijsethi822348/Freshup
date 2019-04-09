@@ -1,5 +1,6 @@
 package com.example.freshup.Activities;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -68,5 +69,10 @@ public class NavigatorActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
 }

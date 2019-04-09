@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,26 +15,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.BookSlotActivity"></activity>
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activities.ForgotPassword"></activity>
+        <activity android:name=".Activities.BookSlotActivity" />
         <activity android:name=".Activities.ProduitsCapilaire" />
         <activity android:name=".Activities.SnekersActivity" />
         <activity android:name=".Activities.VetementsActivity" />
         <activity android:name=".Activities.JoinQueueActivity" />
-        <activity android:name=".Activities.PresentationsActivity">
-
-        </activity>
+        <activity android:name=".Activities.PresentationsActivity"></activity>
         <activity android:name=".Activities.ChangePassActivity" />
         <activity android:name=".Activities.SettingsActivity" />
-        <activity android:name=".Activities.Profile"></activity>
-        <activity android:name=".Activities.NavigatorActivity"></activity>
-        <activity android:name=".Activities.OtpVerification" >
-
-        </activity>
-        <activity android:name=".Activities.SignUpActivity" >
-
-        </activity>
+        <activity android:name=".Activities.Profile" />
+        <activity android:name=".Activities.NavigatorActivity" />
+        <activity android:name=".Activities.OtpVerification"></activity>
+        <activity android:name=".Activities.SignUpActivity"></activity>
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
@@ -43,9 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.About" >
-
-        </activity>
+        <activity android:name=".Activities.About"></activity>
     </application>
 
 </manifest>

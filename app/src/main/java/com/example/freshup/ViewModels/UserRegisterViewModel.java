@@ -98,9 +98,7 @@ public class UserRegisterViewModel extends ViewModel {
                 if (response.body().getSuccess().equalsIgnoreCase("1")){
                     login.setValue(response.body());
                 }
-                else {
-                    Toast.makeText(activity, "Wrong Email or Password", Toast.LENGTH_SHORT).show();
-                }
+
             }
 
             @Override

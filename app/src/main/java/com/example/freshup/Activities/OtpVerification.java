@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.freshup.Api;
 import com.example.freshup.ApiClient;
 import com.example.freshup.Common;
+import com.example.freshup.Login_Logout;
 import com.example.freshup.Models.OtpPojo;
 import com.example.freshup.Models.SimplePojo;
 import com.example.freshup.R;
@@ -52,6 +53,7 @@ public class OtpVerification extends AppCompatActivity {
         otp3=findViewById(R.id.otp3);
         otp4=findViewById(R.id.otp4);
         layout=findViewById(R.id.layout);
+        otp1.requestFocus();
 
         otp1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -72,7 +74,7 @@ public class OtpVerification extends AppCompatActivity {
                 }
                 else if(s.length()==0)
                 {
-                    otp1.clearFocus();
+
                 }
             }
         });
@@ -140,7 +142,6 @@ public class OtpVerification extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(s.length()==1)
                 {
-                    otp4.clearFocus();
                 }
                 else if(s.length()==0)
                 {
@@ -169,30 +170,48 @@ public class OtpVerification extends AppCompatActivity {
     public void verify(View view) {
         String id= Common.GetToken(OtpVerification.this,"ID");
         otp=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
-        viewModel.verification(this,id,otp).observe(this, new Observer<SimplePojo>() {
-            @Override
-            public void onChanged(@Nullable SimplePojo simplePojo) {
-                Toast.makeText(OtpVerification.this, "Verified", Toast.LENGTH_SHORT).show();
-                LayoutInflater layoutInflater= (LayoutInflater) OtpVerification.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View  view1=layoutInflater.inflate(R.layout.otp_verification_popup,null);
-                popup=(Button) findViewById(R.id.done);
+        if (otp.length()==4){
+            viewModel.verification(this,id,otp).observe(this, new Observer<SimplePojo>() {
+                @Override
+                public void onChanged(@Nullable SimplePojo simplePojo) {
+                    Toast.makeText(OtpVerification.this, "Verified", Toast.LENGTH_SHORT).show();
+                    LayoutInflater layoutInflater= (LayoutInflater) OtpVerification.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    View  view1=layoutInflater.inflate(R.layout.otp_verification_popup,null);
+                    popup=(Button) findViewById(R.id.done);
 
-                popupWindow=new PopupWindow(view1, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    popupWindow=new PopupWindow(view1, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                popupWindow.showAtLocation(layout, Gravity.CENTER,0,0);
-            }
-        });
+                    popupWindow.showAtLocation(layout, Gravity.CENTER,0,0);
+                }
+            });
 
+        }
+        else{
+            Toast.makeText(this, "Enter Otp", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
 
     public void popup_dismiss(View view) {
         popupWindow.dismiss();
-        Intent intent=new Intent(OtpVerification.this, LoginActivity.class);
-        startActivity(intent);
-        Toast.makeText(this, "Please LogIn with your Credentials ", Toast.LENGTH_LONG).show();
+        if (Common.GetToken(OtpVerification.this,"ID").equalsIgnoreCase("1") || Login_Logout.GetToken(OtpVerification.this).equalsIgnoreCase("1")){
+            Intent intent=new Intent(OtpVerification.this,Profile.class);
+            startActivity(intent);
+            Toast.makeText(this, "Number Updated", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Intent intent=new Intent(OtpVerification.this, LoginActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Please LogIn with your Credentials ", Toast.LENGTH_LONG).show();
+        }
+
+
+
+
 
     }
+
 }
 

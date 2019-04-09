@@ -60,19 +60,30 @@ public class SignUpActivity extends AppCompatActivity {
         Password=password.getText().toString();
         Confirm=confirm.getText().toString();
 
-        if (Confirm.equals(password.getText().toString())){
-            viewModel.userRegister(SignUpActivity.this,Name,Email,Number,Password,"Android","0").observe(this, new Observer<RegisterModel>() {
-                @Override
-                public void onChanged(@Nullable RegisterModel registerModel) {
-                    Common.SaveToken(SignUpActivity.this,"ID",registerModel.getDetails().getId());
-                    Toast.makeText(SignUpActivity.this, "Otp is "+registerModel.getDetails().getOtp(), Toast.LENGTH_LONG).show();
-                    Intent intent=new Intent(SignUpActivity.this, OtpVerification.class);
-                    startActivity(intent);
-                }
-            });
-        }
-        else{
-            Toast.makeText(this, "Password doesnt match", Toast.LENGTH_SHORT).show();
-        }
+       if (Name!=null && Email!=null && Number!=null && Password!=null && Confirm!=null){
+           if (Confirm.equals(password.getText().toString())){
+               viewModel.userRegister(SignUpActivity.this,Name,Email,Number,Password,"Android","0").observe(this, new Observer<RegisterModel>() {
+                   @Override
+                   public void onChanged(@Nullable RegisterModel registerModel) {
+                       Common.SaveToken(SignUpActivity.this,"ID",registerModel.getDetails().getId());
+                       Toast.makeText(SignUpActivity.this, "Otp is "+registerModel.getDetails().getOtp(), Toast.LENGTH_LONG).show();
+                       Intent intent=new Intent(SignUpActivity.this, OtpVerification.class);
+                       startActivity(intent);
+                   }
+               });
+           }
+           else{
+               Toast.makeText(this, "Password doesnt match", Toast.LENGTH_SHORT).show();
+           }
+       }
+       else {
+           Toast.makeText(this, "Enter All Fields", Toast.LENGTH_SHORT).show();
+       }
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(this,LoginActivity.class);
+        startActivity(intent);
     }
 }
