@@ -1,46 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
-    android:layout_height="550dp"
-    tools:context=".Fragments.Fragment2"
-    android:background="@drawable/background2">
+    android:layout_width="match_parent"
+    android:layout_marginRight="40dp"
+    android:layout_marginLeft="40dp"
+    android:layout_height="wrap_content"
+    tools:context=".Fragments.Fragment1"
+    android:id="@+id/fr2"
+    android:background="@color/theme_700">
 
     <ImageView
-        android:layout_width="350dp"
-        android:scaleX="1.3"
-
-        android:layout_height="280dp"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         android:layout_alignParentTop="true"
-        android:src="@drawable/im"/>
+        android:layout_marginTop="-110dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/im" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="130dp"
-        android:layout_height="120dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="270dp"
         android:background="@drawable/circle"
-        android:id="@+id/image1"
         android:src="@drawable/image_2" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@+id/image1"
-        android:textSize="25dp"
-        android:layout_marginTop="80dp"
-        android:textColor="#CE9B23"
-        android:id="@+id/text1"
-        android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:text="Lorem Ipsum"
-        />
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/text1"
-        android:text="Lorem Ipsum is simple dummy text.Lorem Ipsum is simple dummy tex.Lorem Ipsum is simple dummy text"
-        android:textSize="15dp"
-        android:textColor="#CE9B23"/>
+        android:layout_below="@+id/image"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="25dp"
+            android:textColor="#CE9B23"
+            android:id="@+id/text1"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:text="Lorem Ipsum"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/text1"
+            android:text="Lorem Ipsum is simple dummy text.Lorem Ipsum is simple dummy tex.Lorem Ipsum is simple dummy text"
+            android:textSize="15dp"
+            android:textColor="#CE9B23"/>
+
+    </RelativeLayout>
+
+
 </RelativeLayout>

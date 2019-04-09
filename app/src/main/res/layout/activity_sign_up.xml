@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.LoginActivity">
+    tools:context=".Activities.SignUpActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -22,21 +22,21 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/logo">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="200dp">
+            android:layout_height="match_parent">
             <android.support.v7.widget.CardView
-                android:layout_width="380dp"
-                android:layout_height="550dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="30sp"
                 android:clipToPadding="true"
                 android:elevation="20dp"
                 android:id="@+id/sign_up_card"
                 app:cardCornerRadius="15sp"
                 android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true">
+                android:layout_marginLeft="60sp">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -55,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:text="User Name"
                         android:layout_below="@+id/signup"
-                        android:layout_marginTop="60sp"
+                        android:layout_marginTop="20sp"
                         android:textColor="#000"
                         android:textSize="14dp"
                         android:id="@+id/name"
@@ -63,7 +63,7 @@
                         />
                     <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="50sp"
+                        android:layout_height="wrap_content"
                         android:paddingLeft="25sp"
                         android:drawableLeft="@drawable/man_user"
                         android:layout_marginLeft="40sp"
@@ -89,7 +89,7 @@
                         />
                     <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="50sp"
+                        android:layout_height="wrap_content"
                         android:paddingLeft="25sp"
                         android:layout_marginLeft="40sp"
                         android:layout_centerInParent="true"
@@ -107,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Password"
-                        android:layout_below="@+id/etemail"
+                        android:layout_below="@+id/etnumber"
                         android:layout_marginTop="20sp"
                         android:textColor="#000"
                         android:textSize="14dp"
@@ -116,7 +116,7 @@
                         />
                     <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="50sp"
+                        android:layout_height="wrap_content"
                         android:paddingLeft="25sp"
                         android:inputType="textPassword"
                         android:layout_marginLeft="40sp"
@@ -144,7 +144,7 @@
                         />
                     <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="50sp"
+                        android:layout_height="wrap_content"
                         android:paddingLeft="25sp"
                         android:inputType="textPassword"
                         android:layout_marginLeft="40sp"
@@ -159,6 +159,34 @@
                         android:background="@drawable/rectangle_edittext"
                         />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phone Number"
+                        android:layout_below="@+id/etemail"
+                        android:layout_marginTop="20sp"
+                        android:textColor="#000"
+                        android:textSize="14dp"
+                        android:id="@+id/number"
+                        android:layout_marginLeft="30sp"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="25sp"
+                        android:inputType="number"
+                        android:layout_marginLeft="40sp"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@+id/number"
+                        android:drawableLeft="@drawable/ic_phone_black_24dp"
+                        android:drawablePadding="12sp"
+                        android:hint="99999-99999"
+                        android:id="@+id/etnumber"
+                        android:elevation="10sp"
+                        android:layout_marginTop="10sp"
+                        android:background="@drawable/rectangle_edittext"
+                        />
+
 
 
                     <Button
@@ -168,12 +196,12 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="20sp"
                         android:background="@drawable/rectangle_button"
-                        android:layout_alignParentBottom="true"
                         android:text="SIGN UP"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="30sp"
+                        android:layout_below="@+id/etconfirm"
+                        android:textSize="15sp"
                         android:id="@+id/signupbutton"
-                        android:textColor="#F7F6F6"/>
+                        android:textColor="@color/white"
+                        android:layout_marginBottom="10sp"/>
 
 
 

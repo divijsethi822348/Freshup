@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 super.run();
                 try {
-                    this.sleep(3000);
+                    this.sleep(1000);
                     Intent intent=new Intent(MainActivity.this, About.class);
                     startActivity(intent);
                 } catch (InterruptedException e) {

@@ -41,7 +41,7 @@ public class About extends AppCompatActivity {
                         public void run() {
                             super.run();
                             try {
-                                this.sleep(3000);
+                                this.sleep(0000);
                                 Intent intent = new Intent(About.this, LoginActivity.class);
                                 startActivity(intent);
                             } catch (InterruptedException e) {
