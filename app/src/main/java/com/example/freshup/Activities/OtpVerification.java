@@ -1,7 +1,10 @@
 package com.example.freshup.Activities;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,7 +19,16 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.freshup.Api;
+import com.example.freshup.ApiClient;
+import com.example.freshup.Common;
+import com.example.freshup.Models.SimplePojo;
 import com.example.freshup.R;
+import com.example.freshup.ViewModels.UserRegisterViewModel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OtpVerification extends AppCompatActivity {
 
@@ -24,10 +36,13 @@ public class OtpVerification extends AppCompatActivity {
     Button popup;
     RelativeLayout layout;
     PopupWindow popupWindow;
+    String otp="";
+    private UserRegisterViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verification);
+        viewModel= ViewModelProviders.of(this).get(UserRegisterViewModel.class);
         otp1=findViewById(R.id.otp1);
         otp2=findViewById(R.id.otp2);
         otp3=findViewById(R.id.otp3);
@@ -134,14 +149,21 @@ public class OtpVerification extends AppCompatActivity {
     }
 
     public void verify(View view) {
-        LayoutInflater layoutInflater= (LayoutInflater) OtpVerification.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View  view1=layoutInflater.inflate(R.layout.otp_verification_popup,null);
-        popup=(Button) findViewById(R.id.done);
+        String id= Common.GetToken(OtpVerification.this,"ID");
+        otp=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
+        viewModel.verification(this,id,otp).observe(this, new Observer<SimplePojo>() {
+            @Override
+            public void onChanged(@Nullable SimplePojo simplePojo) {
+                Toast.makeText(OtpVerification.this, "Verified", Toast.LENGTH_SHORT).show();
+                LayoutInflater layoutInflater= (LayoutInflater) OtpVerification.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View  view1=layoutInflater.inflate(R.layout.otp_verification_popup,null);
+                popup=(Button) findViewById(R.id.done);
 
-        popupWindow=new PopupWindow(view1, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                popupWindow=new PopupWindow(view1, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        popupWindow.showAtLocation(layout, Gravity.CENTER,0,0);
-
+                popupWindow.showAtLocation(layout, Gravity.CENTER,0,0);
+            }
+        });
 
 
 

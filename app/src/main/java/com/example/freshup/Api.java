@@ -1,6 +1,7 @@
 package com.example.freshup;
 
 import com.example.freshup.Models.RegisterModel;
+import com.example.freshup.Models.SimplePojo;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -16,5 +17,11 @@ public interface Api {
                                      @Field("password") String password,
                                      @Field("device_type") String device_type,
                                      @Field("reg_id") String reg_id);
+
+    @FormUrlEncoded
+    @POST("matchVerificationToken")
+    Call<SimplePojo> matchToken(@Field("id") String id,
+                                @Field("token") String token);
+
 
 }
