@@ -100,7 +100,7 @@
                         android:layout_below="@+id/password"
                         android:drawableLeft="@drawable/lock"
                         android:drawablePadding="15sp"
-                        android:hint="Password..."
+                        android:hint="********"
                         android:id="@+id/etpassword"
                         android:elevation="10sp"
                         android:layout_marginTop="10sp"
@@ -118,9 +118,8 @@
                         android:layout_marginTop="10sp"/>
 
                     <Button
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="80sp"
                         android:layout_centerHorizontal="true"
                         android:layout_below="@+id/forgot_password"
                         android:layout_marginTop="20sp"

@@ -29,20 +29,22 @@
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.Profile"></activity>
         <activity android:name=".Activities.NavigatorActivity"></activity>
-        <activity android:name=".Activities.OtpVerification" />
+        <activity android:name=".Activities.OtpVerification" >
+
+        </activity>
         <activity android:name=".Activities.SignUpActivity" >
 
         </activity>
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.MainActivity">
-
-        </activity>
-        <activity android:name=".Activities.About" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Activities.About" >
+
         </activity>
     </application>
 

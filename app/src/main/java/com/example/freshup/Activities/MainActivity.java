@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.freshup.Common;
+import com.example.freshup.Login_Logout;
 import com.example.freshup.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,8 +21,15 @@ public class MainActivity extends AppCompatActivity {
                 super.run();
                 try {
                     this.sleep(1000);
-                    Intent intent=new Intent(MainActivity.this, About.class);
-                    startActivity(intent);
+
+                    if (Login_Logout.GetToken(MainActivity.this).equalsIgnoreCase("1")){
+                        Intent intent=new Intent(MainActivity.this,NavigatorActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Intent intent=new Intent(MainActivity.this, About.class);
+                        startActivity(intent);
+                    }
                 } catch (InterruptedException e) {
                     Toast.makeText(MainActivity.this, ""+e, Toast.LENGTH_SHORT).show();
                 }

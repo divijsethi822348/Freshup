@@ -17,11 +17,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.freshup.Api;
 import com.example.freshup.ApiClient;
 import com.example.freshup.Common;
+import com.example.freshup.Models.OtpPojo;
 import com.example.freshup.Models.SimplePojo;
 import com.example.freshup.R;
 import com.example.freshup.ViewModels.UserRegisterViewModel;
@@ -37,11 +39,13 @@ public class OtpVerification extends AppCompatActivity {
     RelativeLayout layout;
     PopupWindow popupWindow;
     String otp="";
+    TextView resend;
     private UserRegisterViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verification);
+        resend=findViewById(R.id.resend_tv);
         viewModel= ViewModelProviders.of(this).get(UserRegisterViewModel.class);
         otp1=findViewById(R.id.otp1);
         otp2=findViewById(R.id.otp2);
@@ -142,6 +146,20 @@ public class OtpVerification extends AppCompatActivity {
                 {
                     otp3.requestFocus();
                 }
+            }
+        });
+
+        resend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id=Common.GetToken(OtpVerification.this,"ID");
+                 viewModel.resend(OtpVerification.this,id).observe(OtpVerification.this, new Observer<OtpPojo>() {
+                     @Override
+                     public void onChanged(@Nullable OtpPojo otpPojo) {
+                         Toast.makeText(OtpVerification.this, "Otp is "+otpPojo.getDetails().getOtp().toString(), Toast.LENGTH_SHORT).show();
+                     }
+                 });
+
             }
         });
 

@@ -2,6 +2,9 @@ package com.example.freshup.Activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,29 +30,50 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.freshup.Common;
+import com.example.freshup.Login_Logout;
+import com.example.freshup.Models.GetProfilePojo;
 import com.example.freshup.R;
+import com.example.freshup.ViewModels.UserRegisterViewModel;
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class Profile extends AppCompatActivity {
     ImageView profileedit,profilepic;
+    CircleImageView profile;
     RelativeLayout logout;
     EditText name,email,phone;
     TextView profilesave;
+    String picturePath="",picturePath1="";
+    String path="";
+   private UserRegisterViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        viewModel= ViewModelProviders.of(this).get(UserRegisterViewModel.class);
         logout=findViewById(R.id.logout_button);
         name=findViewById(R.id.name_et);
+        profile=findViewById(R.id.profile_image);
         email=findViewById(R.id.emal_et);
         phone=findViewById(R.id.number_et);
         profileedit=findViewById(R.id.profile_edit);
         profilesave=findViewById(R.id.profile_save);
         profilepic=findViewById(R.id.change_pic);
         profilepic.setEnabled(false);
+        getProfile();
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Common.Logout(Profile.this);
+                Login_Logout.Logout(Profile.this);
                 Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(intent);
             }
@@ -58,7 +82,6 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 name.setEnabled(true);
-                email.setEnabled(true);
                 phone.setEnabled(true);
                 profilesave.setVisibility(View.VISIBLE);
                 profileedit.setVisibility(View.GONE);
@@ -68,12 +91,9 @@ public class Profile extends AppCompatActivity {
         profilesave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name.setEnabled(false);
-                email.setEnabled(false);
-                phone.setEnabled(false);
-                profileedit.setVisibility(View.VISIBLE);
-                profilesave.setVisibility(View.GONE);
-                profilepic.setEnabled(false);
+                updateProfile();
+
+
             }
         });
         profilepic.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +119,61 @@ public class Profile extends AppCompatActivity {
 
 
 
+    }
+
+    private void updateProfile() {
+        final ProgressDialog p=new ProgressDialog(Profile.this);
+        p.setMessage("Uploading...");
+        p.show();
+
+        if (picturePath==""){
+            path=picturePath1;
+        }else if (picturePath1==""){
+            path=picturePath;
+        }
+        final File file=new File(path);
+
+        RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),file);
+        MultipartBody.Part image=MultipartBody.
+                Part.createFormData("image",file.getName(),requestBody);
+        RequestBody userId=RequestBody.create(MediaType.parse("text/plain"),Common.GetToken(Profile.this,"ID"));
+
+        RequestBody Name=RequestBody.create(MediaType.parse("text/plain"),name.getText().toString());
+        RequestBody Phone=RequestBody.create(MediaType.parse("text/plain"),phone.getText().toString());
+
+
+        viewModel.updateProfile(Profile.this,userId,Name,Phone,image).observe(Profile.this, new Observer<GetProfilePojo>() {
+            @Override
+            public void onChanged(@Nullable GetProfilePojo getProfilePojo) {
+                name.setEnabled(false);
+                phone.setEnabled(false);
+                profileedit.setVisibility(View.VISIBLE);
+                profilesave.setVisibility(View.GONE);
+                profilepic.setEnabled(false);
+                Toast.makeText(Profile.this, "Saved", Toast.LENGTH_SHORT).show();
+            }
+        });
+        p.dismiss();
+
+    }
+
+    private void getProfile() {
+        String id= Common.GetToken(this,"ID");
+
+        viewModel.getProfile(Profile.this,id).observe(Profile.this, new Observer<GetProfilePojo>() {
+            @Override
+            public void onChanged(@Nullable GetProfilePojo getProfilePojo) {
+                name.setText(getProfilePojo.getDetails().getName());
+                email.setText(getProfilePojo.getDetails().getEmail());
+                phone.setText(getProfilePojo.getDetails().getPhone());
+                if (getProfilePojo.getDetails().getImage().isEmpty()){
+                    Toast.makeText(Profile.this, "Add your image", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Picasso.with(Profile.this).load(getProfilePojo.getDetails().getImage()).into(profile);
+                }
+            }
+        });
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -208,7 +283,8 @@ public class Profile extends AppCompatActivity {
                     int column_index_data = cursor1
                             .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                     cursor1.moveToLast();
-
+                    picturePath = cursor1.getString(column_index_data);
+                    picturePath1="";
 
 
 
@@ -226,9 +302,10 @@ public class Profile extends AppCompatActivity {
                             filePathColumn, null, null, null);
                     cursor.moveToFirst();
 
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                    picturePath1 = cursor.getString(columnIndex);
                     cursor.close();
-
+                    picturePath="";
 
                     break;
             }

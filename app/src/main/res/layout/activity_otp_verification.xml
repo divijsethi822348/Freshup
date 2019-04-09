@@ -28,14 +28,14 @@
             android:layout_height="match_parent"
             android:layout_marginTop="200dp">
             <android.support.v7.widget.CardView
-                android:layout_width="380dp"
-                android:layout_height="300dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="30sp"
                 android:clipToPadding="true"
                 android:elevation="10sp"
                 app:cardCornerRadius="15sp"
                 android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true">
+                android:layout_marginLeft="100sp">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -63,77 +63,96 @@
                         android:id="@+id/tvcode"/>
 
 
-                    <EditText
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/otp1"
-                        android:textAlignment="center"
-                        android:textSize="30sp"
-                        android:layout_marginLeft="90sp"
+                        android:orientation="horizontal"
                         android:layout_below="@+id/tvcode"
+                        android:id="@+id/otp"
                         android:layout_marginTop="20sp"
-                        android:textColor="#FFC107"
-                        android:background="@drawable/otp_edittext"
-                        android:elevation="10sp"
-                        android:inputType="number" />
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/otp_edittext"
-                        android:id="@+id/otp2"
-                        android:textAlignment="center"
-                        android:textSize="30sp"
-                        android:layout_marginLeft="20sp"
-                        android:layout_toRightOf="@+id/otp1"
-                        android:layout_below="@+id/tvcode"
-                        android:layout_marginTop="20sp"
-                        android:elevation="10sp"
-                        android:textColor="#FFC107"
-                        android:inputType="number"/>
+                        android:layout_centerHorizontal="true">
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/otp1"
+                            android:layout_marginLeft="5sp"
+                            android:layout_marginTop="5sp"
+                            android:layout_marginBottom="5sp"
+                            android:textAlignment="center"
+                            android:textSize="30sp"
+                            android:textColor="#FFC107"
+                            android:background="@drawable/otp_edittext"
+                            android:elevation="10sp"
+                            android:inputType="number" />
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/otp_edittext"
+                            android:id="@+id/otp2"
+                            android:layout_marginTop="5sp"
+                            android:layout_marginBottom="5sp"
+                            android:textAlignment="center"
+                            android:textSize="30sp"
+                            android:layout_marginLeft="20sp"
+                            android:elevation="10sp"
+                            android:textColor="#FFC107"
+                            android:inputType="number"/>
 
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/otp_edittext"
-                        android:id="@+id/otp3"
-                        android:elevation="10sp"
-                        android:textAlignment="center"
-                        android:textSize="30sp"
-                        android:layout_marginLeft="20sp"
-                        android:layout_toRightOf="@+id/otp2"
-                        android:layout_below="@+id/tvcode"
-                        android:layout_marginTop="20sp"
-                        android:textColor="#FFC107"
-                        android:inputType="number"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/otp_edittext"
+                            android:id="@+id/otp3"
+                            android:layout_marginTop="5sp"
+                            android:layout_marginBottom="5sp"
+                            android:elevation="10sp"
+                            android:textAlignment="center"
+                            android:textSize="30sp"
+                            android:layout_marginLeft="20sp"
+                            android:textColor="#FFC107"
+                            android:inputType="number"/>
 
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/otp_edittext"
-                        android:layout_marginLeft="20sp"
-                        android:textAlignment="center"
-                        android:textSize="30sp"
-                        android:layout_toRightOf="@+id/otp3"
-                        android:layout_below="@+id/tvcode"
-                        android:layout_marginTop="20sp"
-                        android:id="@+id/otp4"
-                        android:elevation="10sp"
-                        android:textColor="#FFC107"
-                        android:inputType="number"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/otp_edittext"
+                            android:layout_marginLeft="20sp"
+                            android:textAlignment="center"
+                            android:textSize="30sp"
+                            android:id="@+id/otp4"
+                            android:layout_marginTop="5sp"
+                            android:layout_marginBottom="5sp"
+                            android:layout_marginRight="5sp"
+                            android:elevation="10sp"
+                            android:textColor="#FFC107"
+                            android:inputType="number"/>
+
+                    </LinearLayout>
                     <Button
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="80sp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="20sp"
                         android:background="@drawable/rectangle_button"
-                        android:layout_alignParentBottom="true"
                         android:text="verify"
+                        android:layout_below="@+id/otp"
                         android:textSize="20sp"
-                        android:layout_marginBottom="30sp"
                         android:id="@+id/verify_button"
                         android:onClick="verify"
                         android:textColor="#F7F6F6"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RESEND "
+                        android:layout_below="@+id/verify_button"
+                        android:textSize="15sp"
+                        android:id="@+id/resend_tv"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginBottom="30sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="30sp"
+                        android:textColor="#000"/>
 
 
                 </RelativeLayout>
