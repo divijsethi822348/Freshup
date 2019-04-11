@@ -1,6 +1,8 @@
 package com.example.freshup.Adapters;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.freshup.Activities.VetementsActivity;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.R;
+import com.example.freshup.ViewModels.ProductsViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -51,12 +55,19 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         CardView products_card;
         ImageView background,main;
         TextView title;
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull final View itemView) {
             super(itemView);
             products_card=itemView.findViewById(R.id.products_card);
             background=itemView.findViewById(R.id.products_back_image);
             main=itemView.findViewById(R.id.products_image);
             title=itemView.findViewById(R.id.products_title);
+            products_card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context, VetementsActivity.class);
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }

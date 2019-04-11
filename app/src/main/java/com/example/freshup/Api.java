@@ -2,9 +2,11 @@ package com.example.freshup;
 
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.Models.GetProfilePojo;
+import com.example.freshup.Models.GetServicesDataModel;
 import com.example.freshup.Models.OtpPojo;
 import com.example.freshup.Models.RegisterModel;
 import com.example.freshup.Models.SimplePojo;
+import com.example.freshup.Models.SingleProductCategoryModel;
 
 import java.util.Map;
 
@@ -70,5 +72,16 @@ public interface Api {
 
     @GET("getProduct")
     Call<GetHomeDataModel> getProduct();
+
+    @FormUrlEncoded
+    @POST("getSubServices")
+    Call<GetServicesDataModel> getSubServices(@Field("serviceId") String serviceId);
+
+
+    @FormUrlEncoded
+    @POST("getSubCategoryAndProduct")
+    Call<SingleProductCategoryModel> getProducts(@Field("categoryId") String categoryId,
+                                                 @Field("userId") String userId);
+
 }
 
