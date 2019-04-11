@@ -10,10 +10,39 @@
     
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/services_recycler_view">
 
     </android.support.v7.widget.RecyclerView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/services_recycler_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="12sp"
+        android:id="@+id/join_queue_card"
+        app:cardCornerRadius="10dp"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/queue_background_image"
+            android:src="@drawable/hair_cutting_imae"
+            android:scaleType="fitXY"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="JOIN QUEUE"
+            android:id="@+id/join_queue"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+
+
+    </android.support.v7.widget.CardView>
 
 
 

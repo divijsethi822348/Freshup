@@ -3,15 +3,18 @@ package com.example.freshup.Fragments;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.freshup.Activities.JoinQueueActivity;
 import com.example.freshup.Adapters.ServicesRecyclerAdapter;
 import com.example.freshup.Common;
 import com.example.freshup.Models.GetHomeDataModel;
@@ -29,6 +32,7 @@ public class ServicesFragment extends Fragment {
     ServicesViewModel viewModel;
     List<GetHomeDataModel> list=new ArrayList<>();
     List<GetHomeDataModel.Detail> listmodel=new ArrayList<>();
+    CardView join_queue;
 
 
     public ServicesFragment() {
@@ -40,6 +44,7 @@ public class ServicesFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_services, container, false);
+        join_queue=view.findViewById(R.id.join_queue_card);
         viewModel= ViewModelProviders.of(this).get(ServicesViewModel.class);
         servicesRecycler=view.findViewById(R.id.services_recycler_view);
         servicesRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -64,6 +69,14 @@ public class ServicesFragment extends Fragment {
                     servicesRecycler.setAdapter(new ServicesRecyclerAdapter(getContext(),list));
                 }
 
+            }
+        });
+
+        join_queue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), JoinQueueActivity.class);
+                startActivity(intent);
             }
         });
 

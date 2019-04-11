@@ -28,7 +28,6 @@
         android:layout_height="wrap_content"
         android:src="@drawable/logo_black"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:id="@+id/logo_home"/>
 
    <LinearLayout
@@ -36,7 +35,6 @@
        android:layout_height="wrap_content"
        android:id="@+id/linear_layout"
        android:layout_below="@+id/logo_home"
-       android:layout_marginTop="20dp"
        android:weightSum="2"
        android:orientation="horizontal">
        <Button
