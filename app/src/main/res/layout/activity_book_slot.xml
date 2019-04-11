@@ -71,7 +71,7 @@
                             android:layout_height="wrap_content"
                             android:text="SELECT THE DATE"
                             android:textSize="13dp"
-                            android:textColor="#bbaf85"
+                            android:textColor="@color/used"
                             android:layout_margin="5dp"
                             android:layout_gravity="center"/>
 

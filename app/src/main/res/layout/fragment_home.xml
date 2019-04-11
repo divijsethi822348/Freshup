@@ -56,20 +56,11 @@
 
    </LinearLayout>
 
-   <android.support.v4.widget.NestedScrollView
-       android:layout_width="match_parent"
-       android:layout_height="fill_parent"
-       android:layout_below="@+id/linear_layout">
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent">
-           <FrameLayout
-               android:layout_width="match_parent"
-               android:layout_height="fill_parent"
-               android:id="@+id/serv_prod_frag" />
-       </RelativeLayout>
-
-   </android.support.v4.widget.NestedScrollView>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/serv_prod_frag"
+        android:layout_below="@+id/linear_layout"/>
 
 
 

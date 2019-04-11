@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="25dp"
-            android:textColor="#CE9B23"
+            android:textColor="@color/used"
             android:id="@+id/text1"
             android:textStyle="bold"
             android:layout_marginLeft="10dp"
@@ -49,7 +49,7 @@
             android:layout_below="@+id/text1"
             android:text="Lorem Ipsum is simple dummy text.Lorem Ipsum is simple dummy tex.Lorem Ipsum is simple dummy text"
             android:textSize="15dp"
-            android:textColor="#CE9B23"/>
+            android:textColor="@color/used"/>
 
     </RelativeLayout>
 
