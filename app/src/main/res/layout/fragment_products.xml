@@ -8,110 +8,12 @@
     android:background="@drawable/bz">
 
 
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="35sp"
-        android:elevation="10sp"
-        android:id="@+id/vetements"
-        app:cardCornerRadius="20dp"
-        >
+   <android.support.v7.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/products_recycler_view">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/perfume_background"
-            android:scaleType="fitXY"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/perfume"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VETEMENTS"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"/>
+   </android.support.v7.widget.RecyclerView>
 
 
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20sp"
-        android:elevation="10sp"
-        android:layout_below="@+id/vetements"
-        android:id="@+id/snekers"
-        app:cardCornerRadius="20dp"
-        >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/background_hari_wax"
-            android:scaleType="fitXY"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/hair_wax"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SNEKERS"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="70dp"/>
-
-
-
-    </android.support.v7.widget.CardView>
-
-
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20sp"
-        android:elevation="10sp"
-        android:layout_below="@+id/snekers"
-        android:id="@+id/produits_capilaire"
-        app:cardCornerRadius="20dp"
-        >
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/face_products_background_"
-            android:scaleType="fitXY"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/face_products_"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PRODUITS CAPILAIRE"
-            android:textColor="#D3A416"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"/>
-
-
-    </android.support.v7.widget.CardView>
 </RelativeLayout>

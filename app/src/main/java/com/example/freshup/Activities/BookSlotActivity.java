@@ -5,7 +5,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,7 +54,7 @@ public class BookSlotActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(BookSlotActivity.this,PresentationsActivity.class);
+        Intent intent=new Intent(BookSlotActivity.this, ServicesActivity.class);
         startActivity(intent);
     }
 }

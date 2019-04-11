@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.PresentationsActivity">
+    tools:context=".Activities.ServicesActivity">
     <ImageView
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"

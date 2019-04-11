@@ -1,5 +1,6 @@
 package com.example.freshup;
 
+import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.Models.GetProfilePojo;
 import com.example.freshup.Models.OtpPojo;
 import com.example.freshup.Models.RegisterModel;
@@ -12,6 +13,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -63,4 +65,10 @@ public interface Api {
     Call<Map> changePassword(@Field("userId") String userid,
                              @Field("old_password") String old_password,
                              @Field("new_password") String new_password);
+    @GET("getServices")
+    Call<GetHomeDataModel> getServices();
+
+    @GET("getProduct")
+    Call<GetHomeDataModel> getProduct();
 }
+

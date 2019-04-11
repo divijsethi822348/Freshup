@@ -14,7 +14,7 @@ import com.example.freshup.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PresentationsActivity extends AppCompatActivity {
+public class ServicesActivity extends AppCompatActivity {
     RecyclerView services_type,services_expanded;
     List<String> list=new ArrayList<>();
     Button Continue;
@@ -22,7 +22,7 @@ public class PresentationsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_presentations);
+        setContentView(R.layout.activity_services);
         services_type=findViewById(R.id.services_type);
         Continue=findViewById(R.id.continue_presentations);
         list.add("COUPES");
@@ -32,7 +32,7 @@ public class PresentationsActivity extends AppCompatActivity {
         Continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(PresentationsActivity.this,BookSlotActivity.class);
+                Intent intent=new Intent(ServicesActivity.this,BookSlotActivity.class);
                 startActivity(intent);
             }
         });
