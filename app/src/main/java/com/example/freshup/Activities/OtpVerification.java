@@ -41,6 +41,7 @@ public class OtpVerification extends AppCompatActivity {
     PopupWindow popupWindow;
     String otp="";
     TextView resend;
+    String id="";
     private UserRegisterViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,20 +169,24 @@ public class OtpVerification extends AppCompatActivity {
     }
 
     public void verify(View view) {
-        String id= Common.GetToken(OtpVerification.this,"ID");
+        id= Common.GetToken(OtpVerification.this,"ID");
         otp=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
         if (otp.length()==4){
             viewModel.verification(this,id,otp).observe(this, new Observer<SimplePojo>() {
                 @Override
                 public void onChanged(@Nullable SimplePojo simplePojo) {
-                    Toast.makeText(OtpVerification.this, "Verified", Toast.LENGTH_SHORT).show();
-                    LayoutInflater layoutInflater= (LayoutInflater) OtpVerification.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    View  view1=layoutInflater.inflate(R.layout.otp_verification_popup,null);
-                    popup=(Button) findViewById(R.id.done);
+                    if (simplePojo.getSuccess().equalsIgnoreCase("1")){
+                        Toast.makeText(OtpVerification.this, "Verified", Toast.LENGTH_SHORT).show();
+                        LayoutInflater layoutInflater= (LayoutInflater) OtpVerification.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        View  view1=layoutInflater.inflate(R.layout.otp_verification_popup,null);
+                        popup=(Button) findViewById(R.id.done);
 
-                    popupWindow=new PopupWindow(view1, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        popupWindow=new PopupWindow(view1, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                    popupWindow.showAtLocation(layout, Gravity.CENTER,0,0);
+                        popupWindow.showAtLocation(layout, Gravity.CENTER,0,0);
+                    }else if (simplePojo.getSuccess().equalsIgnoreCase("0")){
+                        Toast.makeText(OtpVerification.this, "Otp does not match", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -196,15 +201,18 @@ public class OtpVerification extends AppCompatActivity {
     public void popup_dismiss(View view) {
         popupWindow.dismiss();
         if (Common.GetToken(OtpVerification.this,"ID").equalsIgnoreCase("1") || Login_Logout.GetToken(OtpVerification.this).equalsIgnoreCase("1")){
-            Intent intent=new Intent(OtpVerification.this,Profile.class);
-            startActivity(intent);
-            Toast.makeText(this, "Number Updated", Toast.LENGTH_SHORT).show();
-        }
+
+                Toast.makeText(this, "Number Updated", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(OtpVerification.this,Profile.class);
+                startActivity(intent);
+
+            }
+
         else
         {
-            Intent intent=new Intent(OtpVerification.this, LoginActivity.class);
+            Intent intent=new Intent(OtpVerification.this, NavigatorActivity.class);
             startActivity(intent);
-            Toast.makeText(this, "Please LogIn with your Credentials ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Logged In", Toast.LENGTH_LONG).show();
         }
 
 

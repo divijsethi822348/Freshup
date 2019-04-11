@@ -77,7 +77,6 @@
                         android:id="@+id/etemail"
                         android:layout_marginTop="10sp"
                         android:background="@drawable/rectangle_edittext"
-                        android:elevation="10sp"
                         />
                     <TextView
                         android:layout_width="wrap_content"
@@ -102,7 +101,6 @@
                         android:drawablePadding="15sp"
                         android:hint="********"
                         android:id="@+id/etpassword"
-                        android:elevation="10sp"
                         android:layout_marginTop="10sp"
                         android:background="@drawable/rectangle_edittext"
                         />

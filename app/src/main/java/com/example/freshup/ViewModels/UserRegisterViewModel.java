@@ -4,14 +4,20 @@ import android.app.Activity;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.freshup.Activities.OtpVerification;
+import com.example.freshup.Activities.Profile;
 import com.example.freshup.Api;
 import com.example.freshup.ApiClient;
 import com.example.freshup.Models.GetProfilePojo;
 import com.example.freshup.Models.OtpPojo;
 import com.example.freshup.Models.RegisterModel;
 import com.example.freshup.Models.SimplePojo;
+import com.google.gson.internal.LinkedTreeMap;
+
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -27,6 +33,8 @@ public class UserRegisterViewModel extends ViewModel {
     private MutableLiveData<GetProfilePojo> login;
     private MutableLiveData<GetProfilePojo> get_profile;
     private MutableLiveData<GetProfilePojo> update_profile;
+    private MutableLiveData<Map> forgot;
+    private MutableLiveData<Map> change;
 
     public LiveData<RegisterModel> userRegister(final Activity activity, String name, String email, String phone, String password, String device_type, final String reg_id){
         userRegister=new MutableLiveData<>();
@@ -35,9 +43,9 @@ public class UserRegisterViewModel extends ViewModel {
         api.UserRegister(name,email,phone,password,device_type,reg_id).enqueue(new Callback<RegisterModel>() {
             @Override
             public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
-                if (response.body().getSuccess().equalsIgnoreCase("1")){
+
                     userRegister.setValue(response.body());
-                }
+
             }
 
             @Override
@@ -56,9 +64,8 @@ public class UserRegisterViewModel extends ViewModel {
         api.matchToken(id,otp).enqueue(new Callback<SimplePojo>() {
             @Override
             public void onResponse(Call<SimplePojo> call, Response<SimplePojo> response) {
-                if (response.body().getSuccess().equalsIgnoreCase("1")){
                     verification.setValue(response.body());
-                }
+
             }
 
             @Override
@@ -95,9 +102,7 @@ public class UserRegisterViewModel extends ViewModel {
         api.UserLogin(email,password,device_type,reg_id).enqueue(new Callback<GetProfilePojo>() {
             @Override
             public void onResponse(Call<GetProfilePojo> call, Response<GetProfilePojo> response) {
-                if (response.body().getSuccess().equalsIgnoreCase("1")){
                     login.setValue(response.body());
-                }
 
             }
 
@@ -137,18 +142,69 @@ public class UserRegisterViewModel extends ViewModel {
         api.updateProfile(userId,name,phone,image).enqueue(new Callback<GetProfilePojo>() {
             @Override
             public void onResponse(Call<GetProfilePojo> call, Response<GetProfilePojo> response) {
-                if (response.body().getSuccess().equalsIgnoreCase("1")){
+                if (response.body()!=null){
                     update_profile.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<GetProfilePojo> call, Throwable t) {
-                Toast.makeText(activity, "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "Error :"+t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         return update_profile;
     }
+    public LiveData<Map> forgot(final Activity activity,String email){
+        forgot=new MutableLiveData<>();
 
+        Api api=ApiClient.getApiClient().create(Api.class);
+        api.forgetPassword(email).enqueue(new Callback<Map>() {
+            @Override
+            public void onResponse(Call<Map> call, Response<Map> response) {
+                if (response.body()!=null){
+                    String email=((LinkedTreeMap)response.body()).get("success").toString();
+                    if (email.equalsIgnoreCase("0")){
+                        Toast.makeText(activity, "This email doesn't exist", Toast.LENGTH_SHORT).show();
+                    }else if (email.equalsIgnoreCase("1")){
+                        forgot.setValue(response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map> call, Throwable t) {
+                Toast.makeText(activity, "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return forgot;
+    }
+
+    public LiveData<Map> change_pass(final Activity activity,String id,String old,String new_pass){
+
+        change=new MutableLiveData<>();
+
+        Api api=ApiClient.getApiClient().create(Api.class);
+        api.changePassword(id,old,new_pass).enqueue(new Callback<Map>() {
+            @Override
+            public void onResponse(Call<Map> call, Response<Map> response) {
+                if (response.body()!=null){
+                    String success=((LinkedTreeMap)response.body()).get("success").toString();
+                    if (success.equalsIgnoreCase("0")){
+                        Toast.makeText(activity, "Old pass doenst match", Toast.LENGTH_SHORT).show();
+
+                    }else if(success.equalsIgnoreCase("1")){
+                        change.setValue(response.body());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map> call, Throwable t) {
+                Toast.makeText(activity, "Error :"+t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        return change;
+    }
 
 }

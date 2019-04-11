@@ -53,7 +53,7 @@ public class Profile extends AppCompatActivity {
     TextView profilesave;
     String picturePath="",picturePath1="";
     String path="";
-    String Path="";
+    private MultipartBody.Part Image;
    private UserRegisterViewModel viewModel;
    Boolean Changed;
    String phoneold="";
@@ -135,46 +135,38 @@ public class Profile extends AppCompatActivity {
         p.setMessage("Uploading...");
         p.show();
 
-        if (Picture_Path.GetToken(Profile.this,"path").equalsIgnoreCase("1")){
-            Path=Picture_Path.GetToken(Profile.this,"path");
-
-        }else{
-            Path="";
+        if (path!=""){
+            final File file=new File(path);
+            RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),file);
+             Image=MultipartBody.
+                    Part.createFormData("image",file.getName(),requestBody);
+        }else {
+            final File file=new File(Picture_Path.GetToken(Profile.this,"path"));
+            RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),file);
+            Image=MultipartBody.
+                    Part.createFormData("image",file.getName(),requestBody);
         }
-
-        if (picturePath=="" && picturePath1!=""){
-            path=picturePath1;
-        }else if (picturePath1==""&& picturePath!=""){
-            path=picturePath;
-        }
-        else if (picturePath=="" && picturePath1==""){
-            path=Path;
-        }
-
 
         Picture_Path.SaveToken(Profile.this,"path",path);
         String check_phone=phone.getText().toString();
+        String check_name=name.getText().toString();
 
-        if (phoneold!=check_phone){
-            Changed=true;
-        }
-        else {
+        if (phoneold.equalsIgnoreCase(check_phone)){
             Changed=false;
         }
-            final File file=new File(path);
-            RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),file);
-            MultipartBody.Part image=MultipartBody.
-                    Part.createFormData("image",file.getName(),requestBody);
+        else {
+            Changed=true;
+        }
+
             RequestBody userId=RequestBody.create(MediaType.parse("text/plain"),Common.GetToken(Profile.this,"ID"));
 
-            RequestBody Name=RequestBody.create(MediaType.parse("text/plain"),name.getText().toString());
-            RequestBody Phone=RequestBody.create(MediaType.parse("text/plain"),phone.getText().toString());
+            RequestBody Name=RequestBody.create(MediaType.parse("text/plain"),check_name);
+            RequestBody Phone=RequestBody.create(MediaType.parse("text/plain"),check_phone);
 
 
-            viewModel.updateProfile(Profile.this,userId,Name,Phone,image).observe(Profile.this, new Observer<GetProfilePojo>() {
+            viewModel.updateProfile(Profile.this,userId,Name,Phone,Image).observe(Profile.this, new Observer<GetProfilePojo>() {
                 @Override
                 public void onChanged(@Nullable GetProfilePojo getProfilePojo) {
-
                     name.setEnabled(false);
                     phone.setEnabled(false);
                     profileedit.setVisibility(View.VISIBLE);
@@ -323,8 +315,7 @@ public class Profile extends AppCompatActivity {
                     int column_index_data = cursor1
                             .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                     cursor1.moveToLast();
-                    picturePath = cursor1.getString(column_index_data);
-                    picturePath1="";
+                    path = cursor1.getString(column_index_data);
 
 
 
@@ -343,9 +334,8 @@ public class Profile extends AppCompatActivity {
                     cursor.moveToFirst();
 
                     int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    picturePath1 = cursor.getString(columnIndex);
+                    path = cursor.getString(columnIndex);
                     cursor.close();
-                    picturePath="";
 
                     break;
             }

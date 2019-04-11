@@ -60,15 +60,31 @@ public class SignUpActivity extends AppCompatActivity {
         Password=password.getText().toString();
         Confirm=confirm.getText().toString();
 
-       if (Name!=null && Email!=null && Number!=null && Password!=null && Confirm!=null){
+        if (Name.isEmpty()){
+
+            name.setError("Enter Name");
+        }else if (Email.isEmpty()){
+            email.setError("Enter Email");
+        }else if (Number.isEmpty()){
+            number.setError("Enter Number");
+        }else if (Password.isEmpty()){
+            password.setError("Enter Password");
+        }
+        else
+            {
            if (Confirm.equals(password.getText().toString())){
                viewModel.userRegister(SignUpActivity.this,Name,Email,Number,Password,"Android","0").observe(this, new Observer<RegisterModel>() {
                    @Override
                    public void onChanged(@Nullable RegisterModel registerModel) {
-                       Common.SaveToken(SignUpActivity.this,"ID",registerModel.getDetails().getId());
-                       Toast.makeText(SignUpActivity.this, "Otp is "+registerModel.getDetails().getOtp(), Toast.LENGTH_LONG).show();
-                       Intent intent=new Intent(SignUpActivity.this, OtpVerification.class);
-                       startActivity(intent);
+                       if (registerModel.getSuccess().equalsIgnoreCase("1")){
+                           Common.SaveToken(SignUpActivity.this,"ID",registerModel.getDetails().getId());
+                           Toast.makeText(SignUpActivity.this, "Otp is "+registerModel.getDetails().getOtp(), Toast.LENGTH_LONG).show();
+                           Intent intent=new Intent(SignUpActivity.this, OtpVerification.class);
+                           startActivity(intent);
+                       }
+                       else if (registerModel.getSuccess().equalsIgnoreCase("0")){
+                           Toast.makeText(SignUpActivity.this, "These Credentials already exist", Toast.LENGTH_SHORT).show();
+                       }
                    }
                });
            }
@@ -76,9 +92,7 @@ public class SignUpActivity extends AppCompatActivity {
                Toast.makeText(this, "Password doesnt match", Toast.LENGTH_SHORT).show();
            }
        }
-       else {
-           Toast.makeText(this, "Enter All Fields", Toast.LENGTH_SHORT).show();
-       }
+
     }
     @Override
     public void onBackPressed() {
