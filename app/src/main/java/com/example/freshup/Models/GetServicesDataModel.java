@@ -3,13 +3,26 @@ package com.example.freshup.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class GetServicesDataModel {
-    @SerializedName("message")
-    @Expose
-    private String message;
     @SerializedName("success")
     @Expose
     private String success;
+    @SerializedName("message")
+    @Expose
+    private String message;
+    @SerializedName("details")
+    @Expose
+    private List<Detail> details = null;
+
+    public String getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(String success) {
+        this.success = success;
+    }
 
     public String getMessage() {
         return message;
@@ -19,11 +32,164 @@ public class GetServicesDataModel {
         this.message = message;
     }
 
-    public String getSuccess() {
-        return success;
+    public List<Detail> getDetails() {
+        return details;
     }
 
-    public void setSuccess(String success) {
-        this.success = success;
+    public void setDetails(List<Detail> details) {
+        this.details = details;
+    }
+
+    public class Detail {
+
+        @SerializedName("id")
+        @Expose
+        private String id;
+        @SerializedName("serviceId")
+        @Expose
+        private String serviceId;
+        @SerializedName("title")
+        @Expose
+        private String title;
+        @SerializedName("created")
+        @Expose
+        private String created;
+        @SerializedName("updated")
+        @Expose
+        private String updated;
+        @SerializedName("subSubServices")
+        @Expose
+        private List<SubSubService> subSubServices = null;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getServiceId() {
+            return serviceId;
+        }
+
+        public void setServiceId(String serviceId) {
+            this.serviceId = serviceId;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getCreated() {
+            return created;
+        }
+
+        public void setCreated(String created) {
+            this.created = created;
+        }
+
+        public String getUpdated() {
+            return updated;
+        }
+
+        public void setUpdated(String updated) {
+            this.updated = updated;
+        }
+
+        public List<SubSubService> getSubSubServices() {
+            return subSubServices;
+        }
+
+        public void setSubSubServices(List<SubSubService> subSubServices) {
+            this.subSubServices = subSubServices;
+        }
+
+    }
+
+    public class SubSubService {
+
+        @SerializedName("id")
+        @Expose
+        private String id;
+        @SerializedName("serviceId")
+        @Expose
+        private String serviceId;
+        @SerializedName("subServiceId")
+        @Expose
+        private String subServiceId;
+        @SerializedName("title")
+        @Expose
+        private String title;
+        @SerializedName("price")
+        @Expose
+        private String price;
+        @SerializedName("created")
+        @Expose
+        private String created;
+        @SerializedName("updated")
+        @Expose
+        private String updated;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getServiceId() {
+            return serviceId;
+        }
+
+        public void setServiceId(String serviceId) {
+            this.serviceId = serviceId;
+        }
+
+        public String getSubServiceId() {
+            return subServiceId;
+        }
+
+        public void setSubServiceId(String subServiceId) {
+            this.subServiceId = subServiceId;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
+
+        public String getCreated() {
+            return created;
+        }
+
+        public void setCreated(String created) {
+            this.created = created;
+        }
+
+        public String getUpdated() {
+            return updated;
+        }
+
+        public void setUpdated(String updated) {
+            this.updated = updated;
+        }
+
     }
 }
