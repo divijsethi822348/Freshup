@@ -29,6 +29,9 @@ public class ServicesTypeAdapter extends RecyclerView.Adapter<ServicesTypeAdapte
     private Context context;
     List<GetServicesDataModel> list;
     ServicesTypeExpandedAdapter expandedAdapter;
+    Boolean expanded=false;
+    int check_position;
+    int position;
 
 
 
@@ -47,10 +50,32 @@ public class ServicesTypeAdapter extends RecyclerView.Adapter<ServicesTypeAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ServicesTypeAdapter.MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ServicesTypeAdapter.MyViewHolder myViewHolder, final int i) {
         GetServicesDataModel model=list.get(i);
         myViewHolder.services_type.setText(model.getDetails().get(i).getTitle());
         myViewHolder.expanded_recycler.setLayoutManager(new LinearLayoutManager(context));
+        myViewHolder.expand_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                position=i;
+
+                if (expanded==false){
+                    check_position=position;
+                    myViewHolder.expanded_recycler.setVisibility(View.VISIBLE);
+                    expanded = true;
+                    myViewHolder.expand.setImageResource(R.drawable.arrow_up);
+
+
+                }else if (position==check_position && expanded==true){
+                    myViewHolder.expanded_recycler.setVisibility(View.GONE);
+                    expanded=false;
+                    myViewHolder.expand.setImageResource(R.drawable.arrow_down);
+                }else {
+                    Toast.makeText(context, "Close previously one", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         expandedAdapter=new ServicesTypeExpandedAdapter(context,list.get(i).getDetails().get(i).getSubSubServices());
 
@@ -68,33 +93,14 @@ public class ServicesTypeAdapter extends RecyclerView.Adapter<ServicesTypeAdapte
         ImageView expand;
         RecyclerView expanded_recycler;
         LinearLayout expand_card;
-        Boolean expanded=false;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             services_type=itemView.findViewById(R.id.services_type_text_view);
             expand=itemView.findViewById(R.id.btn_expand);
             expanded_recycler=itemView.findViewById(R.id.services_type_expanded_recycler_view);
             expand_card=itemView.findViewById(R.id.expand_card);
-            expand_card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "Expanded", Toast.LENGTH_SHORT).show();
 
-                    if (expanded==false){
-                        expanded_recycler.setVisibility(View.VISIBLE);
-                        expanded=true;
-                        expand.setImageResource(R.drawable.arrow_up);
-                    }
-                    else if (expanded==true){
-                        expanded_recycler.setVisibility(View.GONE);
-                        expanded=false;
-                        expand.setImageResource(R.drawable.arrow_down);
-
-                    }
-
-
-                }
-            });
 
         }
     }
