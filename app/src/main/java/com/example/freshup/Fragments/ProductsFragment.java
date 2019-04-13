@@ -50,7 +50,6 @@ public class ProductsFragment extends Fragment {
                 int size=getHomeDataModel.getDetails().size();
                 for (int i=0;i<size;i++){
                     String category_id=getHomeDataModel.getDetails().get(i).getId();
-                    Common.SaveToken(getActivity(),"product id",category_id);
                     Common.SaveToken(getActivity(),"products title"+category_id,getHomeDataModel.getDetails().get(i).getTitle());
                     Common.SaveToken(getActivity(),"products background"+category_id,getHomeDataModel.getDetails().get(i).getImage2());
                     Common.SaveToken(getActivity(),"products image"+category_id,getHomeDataModel.getDetails().get(i).getImage1());

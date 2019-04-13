@@ -17,19 +17,20 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activities.ForgotPassword"></activity>
+        <activity android:name=".Activities.SubSubProductActivity"></activity>
+        <activity android:name=".Activities.ForgotPassword" />
         <activity android:name=".Activities.BookSlotActivity" />
         <activity android:name=".Activities.ProduitsCapilaire" />
         <activity android:name=".Activities.SnekersActivity" />
         <activity android:name=".Activities.SubProductsActivity" />
         <activity android:name=".Activities.JoinQueueActivity" />
-        <activity android:name=".Activities.SubServicesActivity"></activity>
+        <activity android:name=".Activities.SubServicesActivity" />
         <activity android:name=".Activities.ChangePassActivity" />
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.Profile" />
         <activity android:name=".Activities.NavigatorActivity" />
-        <activity android:name=".Activities.OtpVerification"></activity>
-        <activity android:name=".Activities.SignUpActivity"></activity>
+        <activity android:name=".Activities.OtpVerification" />
+        <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
@@ -38,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.About"></activity>
+        <activity android:name=".Activities.About" />
     </application>
 
 </manifest>

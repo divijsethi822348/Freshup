@@ -40,6 +40,16 @@ public class ServicesRecyclerAdapter extends RecyclerView.Adapter<ServicesRecycl
         myViewHolder.title.setText(model.getDetails().get(i).getTitle());
         Picasso.with(context).load(model.getDetails().get(i).getImage1()).into(myViewHolder.main);
         Picasso.with(context).load(model.getDetails().get(i).getImage2()).into(myViewHolder.background);
+        final String id=model.getDetails().get(i).getId();
+        myViewHolder.services_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, SubServicesActivity.class);
+                intent.putExtra("service id",id);
+                context.startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -59,13 +69,7 @@ public class ServicesRecyclerAdapter extends RecyclerView.Adapter<ServicesRecycl
             background=itemView.findViewById(R.id.services_background_image);
             main= itemView.findViewById(R.id.services_image);
             services_card=itemView.findViewById(R.id.services_card);
-            services_card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(context, SubServicesActivity.class);
-                    context.startActivity(intent);
-                }
-            });
+
         }
     }
 }

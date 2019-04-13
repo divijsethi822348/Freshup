@@ -47,7 +47,6 @@ public class SubProductsActivity extends AppCompatActivity {
         category_id=getIntent().getStringExtra("product id");
         Picasso.with(getApplicationContext()).load(Common.GetToken(this,"products background"+category_id)).into(background);
         Picasso.with(getApplicationContext()).load(Common.GetToken(this,"products image"+category_id)).into(products_image);
-        Log.d("TAG","id id "+category_id );
         products_title.setText(Common.GetToken(this,"products title"+category_id));
         viewModel= ViewModelProviders.of(this).get(ProductsViewModel.class);
         user_id=Common.GetToken(this,"ID");
@@ -65,7 +64,8 @@ public class SubProductsActivity extends AppCompatActivity {
                             SingleProductCategoryModel.Detail detail=new SingleProductCategoryModel.Detail();
                             detail.setTitle(singleProductCategoryModel.getDetails().get(i).getTitle());
                             detail.setImage(singleProductCategoryModel.getDetails().get(i).getImage());
-
+                            detail.setCategoryId(singleProductCategoryModel.getDetails().get(i).getCategoryId());
+                            detail.setProduct(singleProductCategoryModel.getDetails().get(i).getProduct());
                             detailList.add(detail);
                             model.setDetails(detailList);
                             list.add(model);

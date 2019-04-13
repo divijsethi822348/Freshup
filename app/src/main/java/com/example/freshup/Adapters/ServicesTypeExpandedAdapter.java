@@ -17,6 +17,7 @@ import java.util.List;
 public class ServicesTypeExpandedAdapter extends RecyclerView.Adapter<ServicesTypeExpandedAdapter.MyViewHolder> {
     Context context;
     List<GetServicesDataModel.SubSubService> list2;
+    Boolean status=false;
 
     public ServicesTypeExpandedAdapter(Context context, List<GetServicesDataModel.SubSubService> list2) {
         this.context = context;
@@ -32,10 +33,25 @@ public class ServicesTypeExpandedAdapter extends RecyclerView.Adapter<ServicesTy
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ServicesTypeExpandedAdapter.MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ServicesTypeExpandedAdapter.MyViewHolder myViewHolder, int i) {
         GetServicesDataModel.SubSubService model=list2.get(i);
         myViewHolder.sub_service_title.setText(model.getTitle());
         myViewHolder.sub_service_price.setText("Rs. "+model.getPrice());
+        myViewHolder.radio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (status==false){
+                    myViewHolder.radio.setImageResource(R.drawable.ic_radio_on_button);
+                    status=true;
+                }
+                else if (status==true){
+                    myViewHolder.radio.setImageResource(R.drawable.ic_circle_shape_outline);
+                    status=false;
+                }
+
+            }
+        });
 
 
 
@@ -49,27 +65,13 @@ public class ServicesTypeExpandedAdapter extends RecyclerView.Adapter<ServicesTy
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView sub_service_title,sub_service_price;
         ImageView radio;
-        public Boolean status=false;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             sub_service_title=itemView.findViewById(R.id.sub_services_title);
             sub_service_price=itemView.findViewById(R.id.price);
             radio=itemView.findViewById(R.id.radio);
-            radio.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    if (status==false){
-                        radio.setImageResource(R.drawable.ic_radio_on_button);
-                        status=true;
-                    }
-                    else if (status==true){
-                        radio.setImageResource(R.drawable.ic_circle_shape_outline);
-                        status=false;
-                    }
-
-                }
-            });
         }
     }
 }

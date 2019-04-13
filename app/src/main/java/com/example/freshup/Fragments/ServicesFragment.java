@@ -55,13 +55,13 @@ public class ServicesFragment extends Fragment {
 
                 int size=getHomeDataModel.getDetails().size();
                 for (int i=0;i<size;i++){
-                    Common.SaveToken(getActivity(),"service id",getHomeDataModel.getDetails().get(i).getId());
                     GetHomeDataModel model=new GetHomeDataModel();
                     GetHomeDataModel.Detail detail=new GetHomeDataModel.Detail();
 
                     detail.setTitle(getHomeDataModel.getDetails().get(i).getTitle());
                     detail.setImage1(getHomeDataModel.getDetails().get(i).getImage1());
                     detail.setImage2(getHomeDataModel.getDetails().get(i).getImage2());
+                    detail.setId(getHomeDataModel.getDetails().get(i).getId());
 
                     listmodel.add(detail);
                     model.setDetails(listmodel);

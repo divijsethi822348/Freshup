@@ -26,9 +26,7 @@ public class SubServicesActivity extends AppCompatActivity {
     ServicesViewModel  viewModel;
     RecyclerView services_type,services_expanded;
     List<GetServicesDataModel> list=new ArrayList<>();
-    List<GetServicesDataModel> list2=new ArrayList<>();
     List<GetServicesDataModel.Detail> listmodel=new ArrayList<>();
-    List<GetServicesDataModel.SubSubService> listmodel2=new ArrayList<>();
     Button Continue;
     String service_id= "";
 
@@ -47,7 +45,7 @@ public class SubServicesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        service_id=Common.GetToken(this,"service id");
+        service_id=getIntent().getStringExtra("service id");
         Log.d("TAG", ""+service_id);
         viewModel.subServices(this,service_id).observe(this, new Observer<GetServicesDataModel>() {
             @Override
