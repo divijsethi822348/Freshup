@@ -22,28 +22,28 @@ import com.example.freshup.ViewModels.ServicesViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServicesActivity extends AppCompatActivity {
+public class SubServicesActivity extends AppCompatActivity {
     ServicesViewModel  viewModel;
     RecyclerView services_type,services_expanded;
-    List<String> list=new ArrayList<>();
+    List<GetServicesDataModel> list=new ArrayList<>();
+    List<GetServicesDataModel> list2=new ArrayList<>();
+    List<GetServicesDataModel.Detail> listmodel=new ArrayList<>();
+    List<GetServicesDataModel.SubSubService> listmodel2=new ArrayList<>();
     Button Continue;
     String service_id= "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_services);
+        setContentView(R.layout.activity_sub_services);
         viewModel= ViewModelProviders.of(this).get(ServicesViewModel.class);
         services_type=findViewById(R.id.services_type);
         Continue=findViewById(R.id.continue_presentations);
-        list.add("COUPES");
-        list.add("COLORATION");
         services_type.setLayoutManager(new LinearLayoutManager(this));
-        services_type.setAdapter(new ServicesTypeAdapter(this,list));
         Continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ServicesActivity.this,BookSlotActivity.class);
+                Intent intent=new Intent(SubServicesActivity.this,BookSlotActivity.class);
                 startActivity(intent);
             }
         });
@@ -52,7 +52,22 @@ public class ServicesActivity extends AppCompatActivity {
         viewModel.subServices(this,service_id).observe(this, new Observer<GetServicesDataModel>() {
             @Override
             public void onChanged(@Nullable GetServicesDataModel getServicesDataModel) {
-                Toast.makeText(ServicesActivity.this, "Successfully fetched: "+getServicesDataModel.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SubServicesActivity.this, "Successfully fetched: "+getServicesDataModel.getMessage(), Toast.LENGTH_SHORT).show();
+               for (int i=0;i<getServicesDataModel.getDetails().size();i++){
+                   GetServicesDataModel model=new GetServicesDataModel();
+                   GetServicesDataModel.Detail detail=new GetServicesDataModel.Detail();
+
+                   detail.setTitle(getServicesDataModel.getDetails().get(i).getTitle());
+                   detail.setSubSubServices(getServicesDataModel.getDetails().get(i).getSubSubServices());
+
+                   listmodel.add(detail);
+                   model.setDetails(listmodel);
+                   list.add(model);
+
+               }
+               services_type.setAdapter(new ServicesTypeAdapter(SubServicesActivity.this,list));
+
+
             }
         });
 

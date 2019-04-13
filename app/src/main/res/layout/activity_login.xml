@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/backgrond_"
-        android:layout_marginTop="-50dp"/>
+        android:layout_marginTop="-100dp"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -124,36 +124,43 @@
                         android:text="SIGN IN"
                         android:id="@+id/signinbutton"
                         android:textColor="@color/white"/>
-                    <View
-                        android:layout_width="145dp"
-                        android:layout_height="1dp"
-                        android:id="@+id/viewleft"
-                        android:background="#000"
-                        android:layout_marginLeft="10sp"
-                        android:layout_below="@+id/signinbutton"
-                        android:layout_marginTop="20dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Or login with"
-                        android:layout_marginLeft="3dp"
-                        android:layout_centerHorizontal="true"
+                        android:id="@+id/viewlayout"
                         android:layout_below="@+id/signinbutton"
-                        android:layout_marginTop="10dp"/>
+                        android:weightSum="4"
+                        android:layout_marginLeft="5sp"
+                        android:layout_marginRight="5sp">
+                        <View
+                            android:layout_width="145dp"
+                            android:layout_height="1dp"
+                            android:id="@+id/viewleft"
+                            android:background="#000"
+                            android:layout_weight="1"
+                            android:layout_marginTop="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Or login with"
+                            android:textSize="12sp"
+                            android:gravity="center"
+                            android:layout_weight="2"
+                            android:layout_marginTop="13dp"/>
 
-                    <View
-                        android:layout_width="145dp"
-                        android:layout_height="1dp"
-                        android:background="#000"
-                        android:id="@+id/viewright"
-                        android:layout_below="@+id/signinbutton"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="10sp"
-                        android:layout_alignParentRight="true"/>
+                        <View
+                            android:layout_width="145dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"
+                            android:background="#000"
+                            android:id="@+id/viewright"
+                            android:layout_marginTop="20dp" />
+
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="70sp"
-                        android:layout_below="@+id/viewleft"
+                        android:layout_below="@+id/viewlayout"
                         android:weightSum="2"
                         android:layout_marginTop="20sp">
                         <LinearLayout

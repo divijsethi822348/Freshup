@@ -1,6 +1,5 @@
 package com.example.freshup.Adapters;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -12,10 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.freshup.Activities.VetementsActivity;
+import com.example.freshup.Activities.SubProductsActivity;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.R;
-import com.example.freshup.ViewModels.ProductsViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,6 +21,7 @@ import java.util.List;
 public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecyclerAdapter.MyViewHolder> {
     List<GetHomeDataModel> list;
     Context context;
+    String id;
 
     public ProductsRecyclerAdapter(List<GetHomeDataModel> list, Context context) {
         this.list = list;
@@ -37,12 +36,21 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         GetHomeDataModel model=list.get(i);
         myViewHolder.title.setText(model.getDetails().get(i).getTitle());
         Picasso.with(context).load(model.getDetails().get(i).getImage1()).into(myViewHolder.main);
+        id=list.get(i).getDetails().get(i).getId();
         Picasso.with(context).load(model.getDetails().get(i).getImage2()).into(myViewHolder.background);
+        myViewHolder.products_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, SubProductsActivity.class);
+                intent.putExtra("product id", list.get(i).getDetails().get(i).getId());
+                context.startActivity(intent);
 
+            }
+        });
 
     }
 
@@ -61,13 +69,6 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
             background=itemView.findViewById(R.id.products_back_image);
             main=itemView.findViewById(R.id.products_image);
             title=itemView.findViewById(R.id.products_title);
-            products_card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(context, VetementsActivity.class);
-                    context.startActivity(intent);
-                }
-            });
 
         }
     }

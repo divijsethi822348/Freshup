@@ -54,7 +54,7 @@ public class BookSlotActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(BookSlotActivity.this, ServicesActivity.class);
+        Intent intent=new Intent(BookSlotActivity.this, SubServicesActivity.class);
         startActivity(intent);
     }
 }

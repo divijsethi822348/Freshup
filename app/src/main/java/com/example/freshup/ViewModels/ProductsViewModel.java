@@ -40,11 +40,11 @@ public class ProductsViewModel extends ViewModel {
         return products;
     }
 
-    public LiveData<SingleProductCategoryModel> subProducts(final Activity activity,String category_id,String id){
+    public LiveData<SingleProductCategoryModel> subProducts(final Activity activity,String categoryId,String userId){
         subproducts=new MutableLiveData<>();
 
         Api api=ApiClient.getApiClient().create(Api.class);
-        api.getProducts(category_id,id).enqueue(new Callback<SingleProductCategoryModel>() {
+        api.getProducts(categoryId,userId).enqueue(new Callback<SingleProductCategoryModel>() {
             @Override
             public void onResponse(Call<SingleProductCategoryModel> call, Response<SingleProductCategoryModel> response) {
                 if (response.body().getSuccess().equalsIgnoreCase("1")){

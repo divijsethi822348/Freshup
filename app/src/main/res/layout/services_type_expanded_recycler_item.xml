@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/rservices_type_expanded_recycler_item_text_view"
+                android:id="@+id/sub_services_title"
                 android:hint="Hello"
                 android:layout_toRightOf="@+id/radio"
                 android:textSize="12dp"
@@ -35,7 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="Kwd 100"
+                android:text="price"
+                android:id="@+id/price"
                 android:textSize="12dp"
                 android:textColor="#000"
                 android:paddingRight="10dp"

@@ -9,15 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.freshup.Models.GetServicesDataModel;
 import com.example.freshup.R;
 
 import java.util.List;
 
 public class ServicesTypeExpandedAdapter extends RecyclerView.Adapter<ServicesTypeExpandedAdapter.MyViewHolder> {
-    private Context context;
-    List<String> list2;
+    Context context;
+    List<GetServicesDataModel.SubSubService> list2;
 
-    public ServicesTypeExpandedAdapter(Context context, List<String> list2) {
+    public ServicesTypeExpandedAdapter(Context context, List<GetServicesDataModel.SubSubService> list2) {
         this.context = context;
         this.list2 = list2;
     }
@@ -32,7 +33,11 @@ public class ServicesTypeExpandedAdapter extends RecyclerView.Adapter<ServicesTy
 
     @Override
     public void onBindViewHolder(@NonNull ServicesTypeExpandedAdapter.MyViewHolder myViewHolder, int i) {
-        myViewHolder.services_type_expanded_recycler_item_text_view.setText(list2.get(i));
+        GetServicesDataModel.SubSubService model=list2.get(i);
+        myViewHolder.sub_service_title.setText(model.getTitle());
+        myViewHolder.sub_service_price.setText("Rs. "+model.getPrice());
+
+
 
     }
 
@@ -42,12 +47,13 @@ public class ServicesTypeExpandedAdapter extends RecyclerView.Adapter<ServicesTy
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView services_type_expanded_recycler_item_text_view;
+        TextView sub_service_title,sub_service_price;
         ImageView radio;
         public Boolean status=false;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            services_type_expanded_recycler_item_text_view=itemView.findViewById(R.id.rservices_type_expanded_recycler_item_text_view);
+            sub_service_title=itemView.findViewById(R.id.sub_services_title);
+            sub_service_price=itemView.findViewById(R.id.price);
             radio=itemView.findViewById(R.id.radio);
             radio.setOnClickListener(new View.OnClickListener() {
                 @Override

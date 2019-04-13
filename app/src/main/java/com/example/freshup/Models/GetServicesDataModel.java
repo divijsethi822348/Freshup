@@ -40,7 +40,7 @@ public class GetServicesDataModel {
         this.details = details;
     }
 
-    public class Detail {
+    public static class Detail {
 
         @SerializedName("id")
         @Expose
@@ -111,7 +111,7 @@ public class GetServicesDataModel {
 
     }
 
-    public class SubSubService {
+    public static class SubSubService {
 
         @SerializedName("id")
         @Expose
