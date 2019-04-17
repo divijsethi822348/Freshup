@@ -4,13 +4,10 @@ import android.app.Activity;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.content.Intent;
 import android.widget.Toast;
 
-import com.example.freshup.Activities.OtpVerification;
-import com.example.freshup.Activities.Profile;
-import com.example.freshup.Api;
-import com.example.freshup.ApiClient;
+import com.example.freshup.Retrofit.Api;
+import com.example.freshup.Retrofit.ApiClient;
 import com.example.freshup.Models.GetProfilePojo;
 import com.example.freshup.Models.OtpPojo;
 import com.example.freshup.Models.RegisterModel;
@@ -24,7 +21,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Part;
 
 public class UserRegisterViewModel extends ViewModel {
     private MutableLiveData<RegisterModel> userRegister;

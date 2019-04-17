@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.freshup.Common;
 import com.example.freshup.R;
 import com.example.freshup.ViewModels.UserRegisterViewModel;
 

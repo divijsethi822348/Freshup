@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.freshup.Activities.SubProductsActivity;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.R;
+import com.example.freshup.Util.App;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -45,8 +46,8 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         myViewHolder.products_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                App.getSingleton().setProduct_id(list.get(i).getDetails().get(i).getId());
                 Intent intent=new Intent(context, SubProductsActivity.class);
-                intent.putExtra("product id", list.get(i).getDetails().get(i).getId());
                 context.startActivity(intent);
 
             }

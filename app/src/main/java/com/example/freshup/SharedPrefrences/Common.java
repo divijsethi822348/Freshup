@@ -1,10 +1,10 @@
-package com.example.freshup;
+package com.example.freshup.SharedPrefrences;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 
-public class Picture_Path {
-    public static void SaveToken(Activity activity, String key, String value){
+public class Common {
+    public static void SaveToken(Activity activity,String key,String value){
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyFile",0);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putString(key,value);
@@ -20,5 +20,5 @@ public class Picture_Path {
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyFile",0);
         sharedPreferences.edit().clear().commit();
     }
-}
 
+}

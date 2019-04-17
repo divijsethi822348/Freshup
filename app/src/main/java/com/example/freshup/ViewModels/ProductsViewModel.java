@@ -6,8 +6,8 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.widget.Toast;
 
-import com.example.freshup.Api;
-import com.example.freshup.ApiClient;
+import com.example.freshup.Retrofit.Api;
+import com.example.freshup.Retrofit.ApiClient;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.Models.SingleProductCategoryModel;
 

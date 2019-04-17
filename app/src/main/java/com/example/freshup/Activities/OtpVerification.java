@@ -20,18 +20,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.freshup.Api;
-import com.example.freshup.ApiClient;
-import com.example.freshup.Common;
-import com.example.freshup.Login_Logout;
+import com.example.freshup.SharedPrefrences.Common;
+import com.example.freshup.SharedPrefrences.Login_Logout;
 import com.example.freshup.Models.OtpPojo;
 import com.example.freshup.Models.SimplePojo;
 import com.example.freshup.R;
 import com.example.freshup.ViewModels.UserRegisterViewModel;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class OtpVerification extends AppCompatActivity {
 

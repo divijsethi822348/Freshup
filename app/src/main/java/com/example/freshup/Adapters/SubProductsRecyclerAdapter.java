@@ -15,14 +15,16 @@ import android.widget.Toast;
 import com.example.freshup.Activities.SubSubProductActivity;
 import com.example.freshup.Models.SingleProductCategoryModel;
 import com.example.freshup.R;
+import com.example.freshup.Util.App;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubProductsRecyclerAdapter extends RecyclerView.Adapter<SubProductsRecyclerAdapter.MyViewHolder> {
     Context context;
     List<SingleProductCategoryModel> list;
-    List<SingleProductCategoryModel.Product> list2;
+    List<SingleProductCategoryModel.Product> list2=new ArrayList<>();
 
     public SubProductsRecyclerAdapter(Context context, List<SingleProductCategoryModel> list) {
         this.context = context;
@@ -41,11 +43,13 @@ public class SubProductsRecyclerAdapter extends RecyclerView.Adapter<SubProducts
         final SingleProductCategoryModel model=list.get(i);
         myViewHolder.sub_products_title.setText(model.getDetails().get(i).getTitle());
         Picasso.with(context).load(model.getDetails().get(i).getImage()).into(myViewHolder.sub_products_image);
+//        list2.add(model.getDetails().get(i).getProduct().get(i));
 
         myViewHolder.sub_products_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (model.getDetails().get(i).getProduct().size()>0){
+                   App.getSingleton().setSubSubProducts(list.get(i).getDetails().get(i).getProduct());
                     Intent intent=new Intent(context, SubSubProductActivity.class);
                     String id=model.getDetails().get(i).getCategoryId();
                     intent.putExtra("id",id);

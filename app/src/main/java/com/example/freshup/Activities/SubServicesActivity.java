@@ -14,9 +14,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.freshup.Adapters.ServicesTypeAdapter;
-import com.example.freshup.Common;
 import com.example.freshup.Models.GetServicesDataModel;
 import com.example.freshup.R;
+import com.example.freshup.Util.App;
 import com.example.freshup.ViewModels.ServicesViewModel;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class SubServicesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        service_id=getIntent().getStringExtra("service id");
+        service_id= App.getSingleton().getService_id();
         Log.d("TAG", ""+service_id);
         viewModel.subServices(this,service_id).observe(this, new Observer<GetServicesDataModel>() {
             @Override

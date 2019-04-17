@@ -9,10 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.freshup.Common;
+import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.R;
 import com.example.freshup.ViewModels.UserRegisterViewModel;
 

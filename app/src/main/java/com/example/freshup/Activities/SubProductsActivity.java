@@ -8,15 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.freshup.Adapters.SubProductsRecyclerAdapter;
-import com.example.freshup.Common;
+import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.Models.SingleProductCategoryModel;
 import com.example.freshup.R;
+import com.example.freshup.Util.App;
 import com.example.freshup.ViewModels.ProductsViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -44,7 +44,7 @@ public class SubProductsActivity extends AppCompatActivity {
         GridLayoutManager layoutManager=new GridLayoutManager(getApplicationContext(),2);
         sub_products_recycler.setLayoutManager(layoutManager);
 
-        category_id=getIntent().getStringExtra("product id");
+        category_id= App.getSingleton().getProduct_id();
         Picasso.with(getApplicationContext()).load(Common.GetToken(this,"products background"+category_id)).into(background);
         Picasso.with(getApplicationContext()).load(Common.GetToken(this,"products image"+category_id)).into(products_image);
         products_title.setText(Common.GetToken(this,"products title"+category_id));

@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 
 import com.example.freshup.Activities.JoinQueueActivity;
 import com.example.freshup.Adapters.ServicesRecyclerAdapter;
-import com.example.freshup.Common;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.R;
 import com.example.freshup.ViewModels.ServicesViewModel;

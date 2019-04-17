@@ -1,4 +1,4 @@
-package com.example.freshup;
+package com.example.freshup.Retrofit;
 
 import java.util.concurrent.TimeUnit;
 

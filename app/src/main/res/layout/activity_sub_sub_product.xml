@@ -38,13 +38,13 @@
         android:layout_centerHorizontal="true"
         android:elevation="20dp"
         app:cardCornerRadius="10sp">
-        <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/sub_sub_products_recycler">-->
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sub_sub_products_recycler">
 
 
-        <!--</android.support.v7.widget.RecyclerView>-->
+        </android.support.v7.widget.RecyclerView>
 
 
     </android.support.v7.widget.CardView>

@@ -6,15 +6,14 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.freshup.Common;
-import com.example.freshup.Login_Logout;
+import com.example.freshup.SharedPrefrences.Common;
+import com.example.freshup.SharedPrefrences.Login_Logout;
 import com.example.freshup.Models.GetProfilePojo;
 import com.example.freshup.R;
 import com.example.freshup.ViewModels.UserRegisterViewModel;

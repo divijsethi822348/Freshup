@@ -1,19 +1,19 @@
-package com.example.freshup;
+package com.example.freshup.SharedPrefrences;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 
-public class Common {
-    public static void SaveToken(Activity activity,String key,String value){
+public class Login_Logout {
+    public static void SaveToken(Activity activity){
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyFile",0);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString(key,value);
+        editor.putString("Token","1");
         editor.commit();
     }
 
-    public static String GetToken(Activity activity,String key){
+    public static String GetToken(Activity activity){
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyFile",0);
-        return sharedPreferences.getString(key,"");
+        return sharedPreferences.getString("Token","");
     }
 
     public static void Logout(Activity activity){

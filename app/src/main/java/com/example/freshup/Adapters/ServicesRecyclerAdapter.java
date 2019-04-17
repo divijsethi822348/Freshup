@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.freshup.Activities.SubServicesActivity;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.R;
+import com.example.freshup.Util.App;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -44,8 +45,8 @@ public class ServicesRecyclerAdapter extends RecyclerView.Adapter<ServicesRecycl
         myViewHolder.services_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                App.getSingleton().setService_id(id);
                 Intent intent=new Intent(context, SubServicesActivity.class);
-                intent.putExtra("service id",id);
                 context.startActivity(intent);
             }
         });

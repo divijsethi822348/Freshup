@@ -5,8 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.freshup.Common;
-import com.example.freshup.Login_Logout;
+import com.example.freshup.SharedPrefrences.Login_Logout;
 import com.example.freshup.R;
 
 public class MainActivity extends AppCompatActivity {

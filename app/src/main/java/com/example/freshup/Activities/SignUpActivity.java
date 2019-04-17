@@ -11,16 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.freshup.Api;
-import com.example.freshup.ApiClient;
-import com.example.freshup.Common;
+import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.Models.RegisterModel;
 import com.example.freshup.R;
 import com.example.freshup.ViewModels.UserRegisterViewModel;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
     Button signupbutton;

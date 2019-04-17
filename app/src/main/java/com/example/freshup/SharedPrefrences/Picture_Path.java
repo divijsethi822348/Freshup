@@ -1,24 +1,24 @@
-package com.example.freshup;
+package com.example.freshup.SharedPrefrences;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 
-public class Login_Logout {
-    public static void SaveToken(Activity activity){
+public class Picture_Path {
+    public static void SaveToken(Activity activity, String key, String value){
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyFile",0);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("Token","1");
+        editor.putString(key,value);
         editor.commit();
     }
 
-    public static String GetToken(Activity activity){
+    public static String GetToken(Activity activity,String key){
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyFile",0);
-        return sharedPreferences.getString("Token","");
+        return sharedPreferences.getString(key,"");
     }
 
     public static void Logout(Activity activity){
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyFile",0);
         sharedPreferences.edit().clear().commit();
     }
-
 }
+

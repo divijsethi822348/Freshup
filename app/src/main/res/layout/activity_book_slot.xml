@@ -39,7 +39,7 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/txt"
             android:layout_margin="10dp"
             app:cardCornerRadius="5dp">
@@ -108,6 +108,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Holiday"
+                            android:id="@+id/holiday_tv"
                             android:layout_margin="10dp"/>
 
                     </LinearLayout>
@@ -120,12 +121,30 @@
                     android:text="Shop Close"
                     android:textStyle="bold"
                     android:textColor="#000"
+                    android:id="@+id/close_shop_tv"
                     android:textSize="30dp"
+                    android:visibility="gone"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"/>
 
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:visibility="gone"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginBottom="10sp"
+                    android:id="@+id/barber_recycler"
+                    android:layout_marginLeft="5dp">
+
+                </android.support.v7.widget.RecyclerView>
+
             </LinearLayout>
+
+
+
 
         </android.support.v7.widget.CardView>
 
