@@ -11,13 +11,17 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.freshup.Adapters.ServicesTypeAdapter;
 import com.example.freshup.Models.GetServicesDataModel;
 import com.example.freshup.R;
+import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.Util.App;
 import com.example.freshup.ViewModels.ServicesViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +33,8 @@ public class SubServicesActivity extends AppCompatActivity {
     List<GetServicesDataModel.Detail> listmodel=new ArrayList<>();
     Button Continue;
     String service_id= "";
+    ImageView background,main;
+    TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,9 @@ public class SubServicesActivity extends AppCompatActivity {
         viewModel= ViewModelProviders.of(this).get(ServicesViewModel.class);
         services_type=findViewById(R.id.services_type);
         Continue=findViewById(R.id.continue_presentations);
+        background=findViewById(R.id.sub_serv_bac_image);
+        main=findViewById(R.id.sub_serv_main_image);
+        title=findViewById(R.id.sub_serv_title);
         services_type.setLayoutManager(new LinearLayoutManager(this));
         Continue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +55,12 @@ public class SubServicesActivity extends AppCompatActivity {
             }
         });
         service_id= App.getSingleton().getService_id();
-        Log.d("TAG", ""+service_id);
+        title.setText(Common.GetToken(SubServicesActivity.this,"Service title"+service_id));
+        Picasso.with(getApplicationContext()).load(Common.GetToken(SubServicesActivity.this,"Service background"+service_id)).into(background);
+        Picasso.with(getApplicationContext()).load(Common.GetToken(SubServicesActivity.this,"Service image"+service_id)).into(main);
+//        Log.d("service_id", ""+service_id);
+//        Log.d("id",""+id);
+//        Log.d("title",Common.GetToken(SubServicesActivity.this,"Service title"+id));
         viewModel.subServices(this,service_id).observe(this, new Observer<GetServicesDataModel>() {
             @Override
             public void onChanged(@Nullable GetServicesDataModel getServicesDataModel) {
@@ -73,10 +87,5 @@ public class SubServicesActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent=new Intent(this,NavigatorActivity.class);
-        startActivity(intent);
-    }
+
 }

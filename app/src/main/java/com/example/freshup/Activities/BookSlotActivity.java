@@ -18,8 +18,10 @@ import android.widget.Toast;
 import com.example.freshup.Adapters.BarberRecyclerAdapter;
 import com.example.freshup.Models.BarberDetailsModel;
 import com.example.freshup.R;
+import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.Util.App;
 import com.example.freshup.ViewModels.BarberViewModel;
+import com.squareup.picasso.Picasso;
 
 import org.joda.time.DateTime;
 
@@ -40,12 +42,13 @@ import noman.weekcalendar.listener.OnDateClickListener;
 public class BookSlotActivity extends AppCompatActivity {
 
     WeekCalendar weekCalendar;
-    TextView getDate,shop_close,holiday_tv;
-    ImageView back;
+    TextView getDate,shop_close,holiday_tv,title;
+    ImageView background,main;
     Calendar cal;
     SimpleDateFormat sdf, sdf1;
     String datedata="";
     String day="";
+    String service_id;
     String[] weekday;
     RecyclerView barber_recycler;
     BarberViewModel viewModel;
@@ -66,33 +69,37 @@ public class BookSlotActivity extends AppCompatActivity {
         weekCalendar = (WeekCalendar)findViewById(R.id.weekCalendar);
         getDate = (TextView)findViewById(R.id.getDate);
         shop_close=findViewById(R.id.close_shop_tv);
+        background=findViewById(R.id.book_Slot_Back_Ground_Image);
+        main=findViewById(R.id.book_Slot_Main_Image);
+        title=findViewById(R.id.book_Slot_title);
         barber_recycler.setLayoutManager(new LinearLayoutManager(this));
-        getBarberDetails();
 
         cal = Calendar.getInstance();
         sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf1 = new SimpleDateFormat("EEEE MMMM dd, yyyy");
         datedata = sdf.format(cal.getTime());
 
-
-
-
-
-
         final Date date = new Date();
         currentDate = sdf.format(date);
         getDate.setText(sdf1.format(date));
         day=getDate.getText().toString();
         weekday=day.split(" ");
-//        getbarbarDetails(datedata);
+        list.clear();
+        getBarberDetails();
         App.getSingleton().setAppointmentDate(datedata);
         weekCalendar.reset();
+
+        service_id= App.getSingleton().getService_id();
+        title.setText(Common.GetToken(BookSlotActivity.this,"Service title"+service_id));
+        Picasso.with(getApplicationContext()).load(Common.GetToken(BookSlotActivity.this,"Service background"+service_id)).into(background);
+        Picasso.with(getApplicationContext()).load(Common.GetToken(BookSlotActivity.this,"Service image"+service_id)).into(main);
 
         weekCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(DateTime dateTime) {
-                barber_recycler.setVisibility(View.GONE);
                 list.clear();
+                barber_recycler.setVisibility(View.GONE);
+
 
                 StringTokenizer stringTokenizer = new StringTokenizer(String.valueOf(dateTime.toDateTime().dayOfWeek().getDateTime()), "T");
                 String dateValue = stringTokenizer.nextElement().toString();
@@ -101,15 +108,15 @@ public class BookSlotActivity extends AppCompatActivity {
                 try {
                     Date select = sdf.parse(datedata);
                     Date Current = sdf.parse(currentDate);
-//
+
                     if (Current.getTime() <= select.getTime()) {
                         dateDatavalue = 0;
-//                        getbarbarDetails(datedata);
+                        list.clear();
+                        getBarberDetails();
                         App.getSingleton().setAppointmentDate(datedata);
                         getDate.setText(sdf1.format(dateTime.toDate()));
                         day=getDate.getText().toString();
                         weekday=day.split(" ");
-                        getBarberDetails();
 
 
                     } else {
@@ -156,7 +163,12 @@ public class BookSlotActivity extends AppCompatActivity {
                         model.setDetails(getdetail);
 
                         list.add(model);
-                        barber_recycler.setAdapter(new BarberRecyclerAdapter(BookSlotActivity.this,list));
+                        String date=getDate.getText().toString();
+                        String[] day=date.split(" ");
+
+                        BarberRecyclerAdapter adapter=new BarberRecyclerAdapter(BookSlotActivity.this,list,datedata,day[0]);
+                        adapter.notifyDataSetChanged();
+                        barber_recycler.setAdapter(adapter);
                         shop_close.setVisibility(View.GONE);
                         barber_recycler.setVisibility(View.VISIBLE);
 
@@ -174,10 +186,4 @@ public class BookSlotActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent=new Intent(BookSlotActivity.this, SubServicesActivity.class);
-        startActivity(intent);
-    }
 }

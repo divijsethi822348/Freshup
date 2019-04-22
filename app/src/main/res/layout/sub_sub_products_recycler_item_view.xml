@@ -33,13 +33,45 @@
                 android:id="@+id/sub_sub_products_title"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="5sp"/>
+            <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                app:backGroundColor="#86597D"
+                app:initialNumber="1"
+                android:id="@+id/quantity_button"
+                android:layout_below="@id/sub_sub_products_title">
+
+            </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
             <Button
                 android:layout_width="wrap_content"
                 android:minWidth="110dp"
-                android:layout_height="wrap_content"
+                android:layout_height="35sp"
                 android:text="Add to Cart"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:id="@+id/add_to_cart"
+                android:layout_below="@+id/product_price"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/add_to_cart"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price"
+                android:id="@+id/product_price"
+                android:textColor="#000"
                 android:layout_below="@+id/sub_sub_products_title"
+                android:layout_toRightOf="@+id/quantity_button"
+                android:layout_marginLeft="50sp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:minWidth="110dp"
+                android:layout_height="35sp"
+                android:text="Go To Cart"
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/go_to_cart"
+                android:layout_below="@+id/product_price"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/add_to_cart"/>
         </RelativeLayout>

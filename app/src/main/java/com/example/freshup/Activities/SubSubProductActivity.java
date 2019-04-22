@@ -1,14 +1,22 @@
 package com.example.freshup.Activities;
 
+import android.app.Activity;
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.freshup.Adapters.SubSubProductsRecyclerAdapter;
+import com.example.freshup.Models.AddToCartModel;
 import com.example.freshup.Models.SingleProductCategoryModel;
 import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.R;
@@ -26,6 +34,7 @@ public class SubSubProductActivity extends AppCompatActivity {
     String category_id="";
     CartViewModel viewModel;
     List<SingleProductCategoryModel.Product> subSubProductList=new ArrayList<>();
+    int quantity=1;
 
 
     @Override
@@ -46,8 +55,37 @@ public class SubSubProductActivity extends AppCompatActivity {
 
         subSubProductList= App.getSingleton().getSubSubProducts();
 
-        sub_sub_products_recycler.setAdapter(new SubSubProductsRecyclerAdapter(this,subSubProductList));
+        sub_sub_products_recycler.setAdapter(new SubSubProductsRecyclerAdapter(this, subSubProductList, new SubSubProductsRecyclerAdapter.Quantity_Change() {
+            @Override
+            public void newQuantity(int number) {
+                quantity=number;
+            }
+        }, new SubSubProductsRecyclerAdapter.Add_To_Cart_Click() {
+            @Override
+            public void choose(int position) {
+                String userId=Common.GetToken(SubSubProductActivity.this,"ID");
+                String productId=App.getSingleton().getProductId();
 
+                viewModel.addToCartItems(SubSubProductActivity.this,userId,productId,quantity)
+                        .observe(SubSubProductActivity.this, new Observer<AddToCartModel>() {
+                            @Override
+                            public void onChanged(@Nullable AddToCartModel addToCartModel) {
+                                Toast.makeText(SubSubProductActivity.this, "Total Price"+addToCartModel.getTotalPrice(), Toast.LENGTH_SHORT).show();
+                                Intent intent=new Intent(SubSubProductActivity.this,NavigatorActivity.class);
+                                intent.putExtra("check",1);
+                                startActivity(intent);
+                            }
+                        });
+            }
+        },  new SubSubProductsRecyclerAdapter.GO_To_Cart_Click() {
+            @Override
+            public void choose() {
+                Intent intent=new Intent(SubSubProductActivity.this,NavigatorActivity.class);
+                intent.putExtra("check",1);
+                startActivity(intent);
+
+            }
+        }));
 
 
 

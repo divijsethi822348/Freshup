@@ -1,5 +1,6 @@
 package com.example.freshup.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.example.freshup.Activities.SubServicesActivity;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.R;
+import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.Util.App;
 import com.squareup.picasso.Picasso;
 
@@ -36,8 +38,8 @@ public class ServicesRecyclerAdapter extends RecyclerView.Adapter<ServicesRecycl
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        GetHomeDataModel model=list.get(i);
+    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
+        final GetHomeDataModel model=list.get(i);
         myViewHolder.title.setText(model.getDetails().get(i).getTitle());
         Picasso.with(context).load(model.getDetails().get(i).getImage1()).into(myViewHolder.main);
         Picasso.with(context).load(model.getDetails().get(i).getImage2()).into(myViewHolder.background);
@@ -46,6 +48,9 @@ public class ServicesRecyclerAdapter extends RecyclerView.Adapter<ServicesRecycl
             @Override
             public void onClick(View v) {
                 App.getSingleton().setService_id(id);
+                Common.SaveToken((Activity) context,"Service title"+id,model.getDetails().get(i).getTitle());
+                Common.SaveToken((Activity) context,"Service background"+id,model.getDetails().get(i).getImage2());
+                Common.SaveToken((Activity) context,"Service image"+id,model.getDetails().get(i).getImage1());
                 Intent intent=new Intent(context, SubServicesActivity.class);
                 context.startActivity(intent);
             }

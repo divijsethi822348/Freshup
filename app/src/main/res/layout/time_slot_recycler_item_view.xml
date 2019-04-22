@@ -9,14 +9,14 @@
     android:layout_marginLeft="5dp">
 
     <android.support.v7.widget.CardView
-        android:layout_width="50sp"
-        android:layout_height="50sp"
+        android:layout_width="60sp"
+        android:layout_height="60sp"
         android:id="@+id/time_slot_card"
-        app:cardBackgroundColor="@color/colorPrimaryDark">
+        app:cardBackgroundColor="#E9E2E5">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="#000"
             android:layout_gravity="center"
             android:id="@+id/time_slot"/>
 

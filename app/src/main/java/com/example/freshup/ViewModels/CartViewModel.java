@@ -7,8 +7,11 @@ import android.arch.lifecycle.ViewModel;
 import android.widget.Toast;
 
 import com.example.freshup.Models.AddToCartModel;
+import com.example.freshup.Models.GetAddToCartListModel;
 import com.example.freshup.Retrofit.Api;
 import com.example.freshup.Retrofit.ApiClient;
+
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,6 +20,8 @@ import retrofit2.Response;
 
 public class CartViewModel extends ViewModel {
     private MutableLiveData<AddToCartModel> addToCart;
+    private MutableLiveData<GetAddToCartListModel> getCart;
+    private MutableLiveData<Map> delete;
 
     public LiveData<AddToCartModel> addToCartItems(final Activity activity,String userId,String productId,Integer quantity){
         addToCart=new MutableLiveData<>();
@@ -40,5 +45,46 @@ public class CartViewModel extends ViewModel {
         });
 
         return addToCart;
+    }
+
+    public LiveData<GetAddToCartListModel> getCartData(final Activity activity, String userId){
+        getCart=new MutableLiveData<>();
+
+        Api api=ApiClient.getApiClient().create(Api.class);
+        api.getCartList(userId).enqueue(new Callback<GetAddToCartListModel>() {
+            @Override
+            public void onResponse(Call<GetAddToCartListModel> call, Response<GetAddToCartListModel> response) {
+
+                    getCart.setValue(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<GetAddToCartListModel> call, Throwable t) {
+                Toast.makeText(activity, "Error: "+t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return getCart;
+    }
+
+    public LiveData<Map> delete(final Activity activity, String id){
+        delete=new MutableLiveData<>();
+        Api api=ApiClient.getApiClient().create(Api.class);
+        api.DeleteItems(id).enqueue(new Callback<Map>() {
+            @Override
+            public void onResponse(Call<Map> call, Response<Map> response) {
+                delete.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Map> call, Throwable t) {
+                Toast.makeText(activity, "failed"+t.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+        return delete;
     }
 }

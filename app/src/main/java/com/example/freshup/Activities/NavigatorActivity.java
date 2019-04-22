@@ -18,14 +18,15 @@ import com.example.freshup.R;
 
 public class NavigatorActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
-
+    int check_value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigator);
+        check_value=getIntent().getIntExtra("check",0);
 
 
-        SelectFragment(new HomeFragment());
+
         navigationView=findViewById(R.id.bottom_navigator);
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -57,6 +58,13 @@ public class NavigatorActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        if (check_value==0){
+            SelectFragment(new HomeFragment());
+        }else if (check_value==1){
+            navigationView.setSelectedItemId(R.id.nav_cart);
+//            SelectFragment(new CartFragment());
+        }
 
 
 

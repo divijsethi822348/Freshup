@@ -205,6 +205,7 @@ public class OtpVerification extends AppCompatActivity {
         else
         {
             Intent intent=new Intent(OtpVerification.this, NavigatorActivity.class);
+            intent.putExtra("check",0);
             startActivity(intent);
             Toast.makeText(this, "Logged In", Toast.LENGTH_LONG).show();
         }

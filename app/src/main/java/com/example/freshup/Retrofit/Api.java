@@ -2,6 +2,7 @@ package com.example.freshup.Retrofit;
 
 import com.example.freshup.Models.AddToCartModel;
 import com.example.freshup.Models.BarberDetailsModel;
+import com.example.freshup.Models.GetAddToCartListModel;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.Models.GetProfilePojo;
 import com.example.freshup.Models.GetServicesDataModel;
@@ -107,15 +108,16 @@ public interface Api {
     Call<AddToCartModel> addtocart(@Field("userId") String userId,
                                    @Field("productId") String productId,
                                    @Field("quantity") Integer quantity);
-//
-//    @FormUrlEncoded
-//    @POST("getDataFromCart")
-//    Call<GetAddToCartListModel> getCartList(@Field("userId") String userId);
-//
-//    @FormUrlEncoded
-//    @POST("deleteDataFromCart")
-//    Call<Map> DeleteItems(@Field("id") String id);
-//
+
+    @FormUrlEncoded
+    @POST("getDataFromCart")
+    Call<GetAddToCartListModel> getCartList(@Field("userId") String userId);
+
+    @FormUrlEncoded
+    @POST("deleteDataFromCart")
+    Call<Map> DeleteItems(@Field("id") String id);
+
+
 //    @FormUrlEncoded
 //    @POST("UserSocialLogin")
 //    Call<SocialLoginModel> SocialLogin(@Field("name") String name,

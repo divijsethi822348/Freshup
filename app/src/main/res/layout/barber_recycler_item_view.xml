@@ -20,10 +20,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Barber"
+                android:textSize="17sp"
                 android:id="@+id/barber_name"
                 android:textColor="@color/used"
                 android:gravity="center"
-                android:textSize="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"/>
 
@@ -36,7 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/barber_card"
         android:id="@+id/time_slots_recycler"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:elevation="20sp"
+        android:layout_marginBottom="5sp">
 
     </android.support.v7.widget.RecyclerView>
 

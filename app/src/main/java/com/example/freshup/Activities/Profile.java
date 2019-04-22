@@ -33,6 +33,7 @@ import com.example.freshup.SharedPrefrences.Login_Logout;
 import com.example.freshup.Models.GetProfilePojo;
 import com.example.freshup.SharedPrefrences.Picture_Path;
 import com.example.freshup.R;
+import com.example.freshup.Util.App;
 import com.example.freshup.ViewModels.UserRegisterViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -78,6 +79,7 @@ public class Profile extends AppCompatActivity {
             public void onClick(View v) {
                 Common.Logout(Profile.this);
                 Login_Logout.Logout(Profile.this);
+                App.getAppPreference().Logout(Profile.this);
                 Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(intent);
             }
@@ -340,10 +342,4 @@ public class Profile extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent=new Intent(Profile.this,NavigatorActivity.class);
-        startActivity(intent);
-    }
 }

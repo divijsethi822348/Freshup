@@ -33,7 +33,7 @@ public class TimeSlotRecyclerAdapter extends RecyclerView.Adapter<TimeSlotRecycl
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         String time=slot.get(i);
-        myViewHolder.time_slot.setText(time.toString());
+        myViewHolder.time_slot.setText(time);
 
     }
 

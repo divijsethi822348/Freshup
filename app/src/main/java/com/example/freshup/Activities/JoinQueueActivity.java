@@ -14,10 +14,5 @@ public class JoinQueueActivity extends AppCompatActivity {
         setContentView(R.layout.activity_join_queue);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent=new Intent(this,NavigatorActivity.class);
-        startActivity(intent);
-    }
+
 }

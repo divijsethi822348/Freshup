@@ -12,6 +12,17 @@ public class Singleton {
     String product_id;
     String appointmentDate;
     String productId;
+    String userId;
+    String addToCartStatus;
+    int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public List<SingleProductCategoryModel.Product> getSubSubProducts() {
         return subSubProducts;
@@ -59,5 +70,21 @@ public class Singleton {
 
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getAddToCartStatus() {
+        return addToCartStatus;
+    }
+
+    public void setAddToCartStatus(String addToCartStatus) {
+        this.addToCartStatus = addToCartStatus;
     }
 }

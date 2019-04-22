@@ -16,6 +16,7 @@ import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.SharedPrefrences.Login_Logout;
 import com.example.freshup.Models.GetProfilePojo;
 import com.example.freshup.R;
+import com.example.freshup.Util.App;
 import com.example.freshup.ViewModels.UserRegisterViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -73,7 +74,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (getProfilePojo.getSuccess().equalsIgnoreCase("1")) {
                     Login_Logout.SaveToken(LoginActivity.this);
                     Common.SaveToken(LoginActivity.this, "ID", getProfilePojo.getDetails().getId().toString());
+                    String userId=getProfilePojo.getDetails().getId();
+                    App.getSingleton().setUserId(userId);
                     Intent intent = new Intent(LoginActivity.this, NavigatorActivity.class);
+                    intent.putExtra("check",0);
                     startActivity(intent);
                 } else if (getProfilePojo.getSuccess().equalsIgnoreCase("0")) {
                     Toast.makeText(LoginActivity.this, "Please Enter Valid Credentials", Toast.LENGTH_SHORT).show();

@@ -79,10 +79,5 @@ public class SubProductsActivity extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent=new Intent(this,NavigatorActivity.class);
-        startActivity(intent);
-    }
+
 }
