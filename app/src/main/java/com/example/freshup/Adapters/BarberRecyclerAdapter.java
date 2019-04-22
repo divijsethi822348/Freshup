@@ -36,10 +36,13 @@ public class BarberRecyclerAdapter extends RecyclerView.Adapter<BarberRecyclerAd
 
 
 
-    public BarberRecyclerAdapter(Context context, List<BarberDetailsModel> list,String dateData,String day) {
+    public BarberRecyclerAdapter(Context context, List<BarberDetailsModel> list1,String dateData,String day) {
 //        list.clear();
+        if (list!=null){
+            list.clear();
+        }
         this.context = context;
-        this.list = list;
+        list = list1;
         this.dateData=dateData;
         this.day=day;
     }

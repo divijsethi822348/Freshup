@@ -54,28 +54,28 @@ public class SubProductsActivity extends AppCompatActivity {
         viewModel.subProducts(this,category_id,user_id).observe(this, new Observer<SingleProductCategoryModel>() {
             @Override
             public void onChanged(@Nullable SingleProductCategoryModel singleProductCategoryModel) {
-                    if (singleProductCategoryModel.getDetails().isEmpty()){
-                        Toast.makeText(SubProductsActivity.this, "No data found ", Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(SubProductsActivity.this, "Successfully fetched", Toast.LENGTH_SHORT).show();
+                if (singleProductCategoryModel.getDetails().isEmpty()){
+                    Toast.makeText(SubProductsActivity.this, "No data found ", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(SubProductsActivity.this, "Successfully fetched", Toast.LENGTH_SHORT).show();
 
-                        for (int i=0;i<singleProductCategoryModel.getDetails().size();i++){
-                            SingleProductCategoryModel model=new SingleProductCategoryModel();
-                            SingleProductCategoryModel.Detail detail=new SingleProductCategoryModel.Detail();
-                            detail.setTitle(singleProductCategoryModel.getDetails().get(i).getTitle());
-                            detail.setImage(singleProductCategoryModel.getDetails().get(i).getImage());
-                            detail.setCategoryId(singleProductCategoryModel.getDetails().get(i).getCategoryId());
-                            detail.setProduct(singleProductCategoryModel.getDetails().get(i).getProduct());
-                            detailList.add(detail);
-                            model.setDetails(detailList);
-                            list.add(model);
+                    for (int i=0;i<singleProductCategoryModel.getDetails().size();i++){
+                        SingleProductCategoryModel model=new SingleProductCategoryModel();
+                        SingleProductCategoryModel.Detail detail=new SingleProductCategoryModel.Detail();
+                        detail.setTitle(singleProductCategoryModel.getDetails().get(i).getTitle());
+                        detail.setImage(singleProductCategoryModel.getDetails().get(i).getImage());
+                        detail.setCategoryId(singleProductCategoryModel.getDetails().get(i).getCategoryId());
+                        detail.setProduct(singleProductCategoryModel.getDetails().get(i).getProduct());
+                        detailList.add(detail);
+                        model.setDetails(detailList);
+                        list.add(model);
 
-                            sub_products_recycler.setAdapter(new SubProductsRecyclerAdapter(SubProductsActivity.this,list));
-
-                        }
-
+                        sub_products_recycler.setAdapter(new SubProductsRecyclerAdapter(SubProductsActivity.this,list));
 
                     }
+
+
+                }
             }
         });
     }

@@ -2,6 +2,7 @@ package com.example.freshup.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ public class ServicesTypeExpandedAdapter extends RecyclerView.Adapter<ServicesTy
         GetServicesDataModel.SubSubService model=list2.get(i);
         myViewHolder.sub_service_title.setText(model.getTitle());
         myViewHolder.sub_service_price.setText("Rs. "+model.getPrice());
-        myViewHolder.radio.setOnClickListener(new View.OnClickListener() {
+        myViewHolder.sub_sub_service_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -65,12 +66,13 @@ public class ServicesTypeExpandedAdapter extends RecyclerView.Adapter<ServicesTy
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView sub_service_title,sub_service_price;
         ImageView radio;
-
+        CardView sub_sub_service_card;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             sub_service_title=itemView.findViewById(R.id.sub_services_title);
             sub_service_price=itemView.findViewById(R.id.price);
             radio=itemView.findViewById(R.id.radio);
+            sub_sub_service_card=itemView.findViewById(R.id.sub_sub_service_card);
 
         }
     }
