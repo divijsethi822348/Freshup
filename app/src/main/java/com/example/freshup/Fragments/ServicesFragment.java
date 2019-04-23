@@ -18,6 +18,7 @@ import com.example.freshup.Activities.JoinQueueActivity;
 import com.example.freshup.Adapters.ServicesRecyclerAdapter;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.R;
+import com.example.freshup.Util.CommonUtils;
 import com.example.freshup.ViewModels.ServicesViewModel;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class ServicesFragment extends Fragment {
         viewModel= ViewModelProviders.of(this).get(ServicesViewModel.class);
         servicesRecycler=view.findViewById(R.id.services_recycler_view);
         servicesRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        CommonUtils.showProgress(getActivity());
         viewModel.services(getActivity()).observe(getActivity(), new Observer<GetHomeDataModel>() {
             @Override
             public void onChanged(@Nullable GetHomeDataModel getHomeDataModel) {
@@ -67,6 +68,7 @@ public class ServicesFragment extends Fragment {
                     list.add(model);
                     servicesRecycler.setAdapter(new ServicesRecyclerAdapter(getContext(),list));
                 }
+                CommonUtils.dismiss();
 
             }
         });

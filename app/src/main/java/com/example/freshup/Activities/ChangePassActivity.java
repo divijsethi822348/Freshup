@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.R;
+import com.example.freshup.Util.CommonUtils;
 import com.example.freshup.ViewModels.UserRegisterViewModel;
 
 import java.util.Map;
@@ -53,6 +54,7 @@ public class ChangePassActivity extends AppCompatActivity {
         }else if (Confirm.equalsIgnoreCase("")){
             confirm_new_pass.setError("Enter new password");
         }else {
+            CommonUtils.showProgress(ChangePassActivity.this);
             if (New.equalsIgnoreCase(Confirm)){
                 viewModel.change_pass(ChangePassActivity.this, Common.GetToken(ChangePassActivity.this,"ID"),Old,New).observe(this, new Observer<Map>() {
                     @Override
@@ -63,9 +65,12 @@ public class ChangePassActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+                CommonUtils.dismiss();
             }else {
+                CommonUtils.dismiss();
                 Toast.makeText(this, "Passwords dont match", Toast.LENGTH_SHORT).show();
             }
+
         }
 
     }

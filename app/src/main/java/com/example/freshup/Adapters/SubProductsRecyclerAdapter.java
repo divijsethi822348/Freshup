@@ -1,5 +1,6 @@
 package com.example.freshup.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.example.freshup.Activities.SubSubProductActivity;
 import com.example.freshup.Models.SingleProductCategoryModel;
 import com.example.freshup.R;
 import com.example.freshup.Util.App;
+import com.example.freshup.Util.CommonUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -48,13 +50,16 @@ public class SubProductsRecyclerAdapter extends RecyclerView.Adapter<SubProducts
         myViewHolder.sub_products_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommonUtils.showProgress((Activity) context);
                 if (model.getDetails().get(i).getProduct().size()>0){
                    App.getSingleton().setSubSubProducts(list.get(i).getDetails().get(i).getProduct());
                     Intent intent=new Intent(context, SubSubProductActivity.class);
                     String id=model.getDetails().get(i).getCategoryId();
                     intent.putExtra("id",id);
                     context.startActivity(intent);
+                    CommonUtils.dismiss();
                 }else {
+                    CommonUtils.dismiss();
                     Toast.makeText(context, "No items in it", Toast.LENGTH_SHORT).show();
                 }
 

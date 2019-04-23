@@ -16,6 +16,7 @@ import com.example.freshup.Adapters.ProductsRecyclerAdapter;
 import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.R;
+import com.example.freshup.Util.CommonUtils;
 import com.example.freshup.ViewModels.ProductsViewModel;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class ProductsFragment extends Fragment {
         viewModel= ViewModelProviders.of(getActivity()).get(ProductsViewModel.class);
         recyclerView=view.findViewById(R.id.products_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        CommonUtils.showProgress(getActivity());
         viewModel.products(getActivity()).observe(getActivity(), new Observer<GetHomeDataModel>() {
             @Override
             public void onChanged(@Nullable GetHomeDataModel getHomeDataModel) {
@@ -67,7 +68,7 @@ public class ProductsFragment extends Fragment {
                     recyclerView.setAdapter(new ProductsRecyclerAdapter(list,getContext()));
 
                 }
-
+                CommonUtils.dismiss();
 
             }
         });

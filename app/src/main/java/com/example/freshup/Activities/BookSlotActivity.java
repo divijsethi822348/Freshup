@@ -2,10 +2,7 @@ package com.example.freshup.Activities;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,20 +17,19 @@ import com.example.freshup.Models.BarberDetailsModel;
 import com.example.freshup.R;
 import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.Util.App;
+import com.example.freshup.Util.CommonUtils;
 import com.example.freshup.ViewModels.BarberViewModel;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.DateTime;
 
 import java.text.DateFormat;
-import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.StringTokenizer;
 
 import noman.weekcalendar.WeekCalendar;
@@ -76,6 +72,20 @@ public class BookSlotActivity extends AppCompatActivity {
         title = findViewById(R.id.book_Slot_title);
         barber_recycler.setLayoutManager(new LinearLayoutManager(this));
 
+//        boolean isLollipop = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+//        int marvel_1 = isLollipop ? R.drawable.marvel_1_lollipop : R.drawable.marvel_1;
+//        int marvel_2 = isLollipop ? R.drawable.marvel_2_lollipop : R.drawable.marvel_2;
+//        int marvel_3 = isLollipop ? R.drawable.marvel_3_lollipop : R.drawable.marvel_3;
+//        int marvel_4 = isLollipop ? R.drawable.marvel_4_lollipop : R.drawable.marvel_4;
+//        loadingView.addAnimation(Color.parseColor("#FFD200"), marvel_1,
+//                LoadingView.FROM_LEFT);
+//        loadingView.addAnimation(Color.parseColor("#2F5DA9"), marvel_2,
+//                LoadingView.FROM_TOP);
+//        loadingView.addAnimation(Color.parseColor("#FF4218"), marvel_3,
+//                LoadingView.FROM_RIGHT);
+//        loadingView.addAnimation(Color.parseColor("#C7E7FB"), marvel_4,
+//                LoadingView.FROM_BOTTOM);
+
         cal = Calendar.getInstance();
         sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf1 = new SimpleDateFormat("EEEE MMMM dd, yyyy");
@@ -99,7 +109,7 @@ public class BookSlotActivity extends AppCompatActivity {
         weekCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(DateTime dateTime) {
-//                list.clear();
+                list.clear();
                 barber_recycler.setVisibility(View.GONE);
 
 
@@ -113,7 +123,7 @@ public class BookSlotActivity extends AppCompatActivity {
 
                     if (Current.getTime() <= select.getTime()) {
                         dateDatavalue = 0;
-//                        list.clear();
+                        list.clear();
                         getBarberDetails();
                         App.getSingleton().setAppointmentDate(datedata);
                         getDate.setText(sdf1.format(dateTime.toDate()));
@@ -122,10 +132,9 @@ public class BookSlotActivity extends AppCompatActivity {
 
 
                     } else {
-                        //flag=true;
                         dateDatavalue = 1;
                         Toast.makeText(BookSlotActivity.this, "Choose future date", Toast.LENGTH_SHORT).show();
-//                        list.clear();
+                        list.clear();
                         barber_recycler.setVisibility(View.GONE);
                         shop_close.setVisibility(View.GONE);
                     }
@@ -139,6 +148,10 @@ public class BookSlotActivity extends AppCompatActivity {
     }
 
     public void getBarberDetails() {
+        CommonUtils.showProgress(BookSlotActivity.this);
+        barber_recycler.setVisibility(View.VISIBLE);
+        shop_close.setVisibility(View.GONE);
+
         if (list != null) {
             list.clear();
         }
@@ -161,20 +174,22 @@ public class BookSlotActivity extends AppCompatActivity {
                         list.add(model);
                         String date = getDate.getText().toString();
                         day1 = date.split(" ");
-//                        list.clear();
+                        list.clear();
                     }
                     BarberRecyclerAdapter adapter = new BarberRecyclerAdapter(BookSlotActivity.this, list, datedata, day1[0]);
                     adapter.notifyDataSetChanged();
                     barber_recycler.setAdapter(adapter);
-                    shop_close.setVisibility(View.GONE);
-                    barber_recycler.setVisibility(View.VISIBLE);
+                    CommonUtils.dismiss();
+
                 } else if (barberDetailsModel.getSuccess().equalsIgnoreCase("2")) {
                     list.clear();
                     barber_recycler.setVisibility(View.GONE);
                     shop_close.setVisibility(View.VISIBLE);
+                    CommonUtils.dismiss();
                 }
             }
         });
+
 
     }
 

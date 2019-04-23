@@ -25,6 +25,7 @@ import com.example.freshup.Models.GetServicesDataModel;
 import com.example.freshup.R;
 import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.Util.App;
+import com.example.freshup.Util.CommonUtils;
 import com.example.freshup.ViewModels.CartViewModel;
 
 import java.util.ArrayList;
@@ -67,32 +68,6 @@ public class CartFragment extends Fragment {
         userId = Common.GetToken(getActivity(), "ID");
 
         getData();
-//       cart_item_recycler.setAdapter(new CartRecyclerAdapter(getActivity(), list,
-//                new CartRecyclerAdapter.Quantity() {
-//                    @Override
-//                    public void choose(final int quantity) {
-//                        viewModel.addToCartItems(getActivity(),userId,productId,quantity).observe(getViewLifecycleOwner(), new Observer<AddToCartModel>() {
-//                            @Override
-//                            public void onChanged(@Nullable AddToCartModel addToCartModel) {
-//                                list.clear();
-//                                Quantity= String.valueOf(quantity);
-//                                getData();
-//
-//                            }
-//                        });
-//                    }
-//                }, new CartRecyclerAdapter.Delete() {
-//            @Override
-//            public void choose(int position) {
-//                viewModel.delete(getActivity(),Id).observe(getViewLifecycleOwner(), new Observer<Map>() {
-//                    @Override
-//                    public void onChanged(@Nullable Map map) {
-//                        list.clear();
-//                        getData();
-//                    }
-//                });
-//            }
-//        }));
 
 
         return view;
@@ -101,6 +76,7 @@ public class CartFragment extends Fragment {
     }
 
     public void getData() {
+        CommonUtils.showProgress(getActivity());
         viewModel.getCartData(getActivity(), userId).observe(this, new Observer<GetAddToCartListModel>() {
             @Override
             public void onChanged(@Nullable final GetAddToCartListModel getAddToCartListModel) {
@@ -163,11 +139,13 @@ public class CartFragment extends Fragment {
                     });
                     adapter.notifyDataSetChanged();
                     cart_item_recycler.setAdapter(adapter);
+                    CommonUtils.dismiss();
 
 
                 } else if (getAddToCartListModel.getSuccess().equalsIgnoreCase("0")) {
                     cart_item_recycler.setVisibility(View.GONE);
                     cart_empty.setVisibility(View.VISIBLE);
+                    CommonUtils.dismiss();
                 }
             }
         });

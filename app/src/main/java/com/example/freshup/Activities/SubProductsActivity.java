@@ -17,6 +17,7 @@ import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.Models.SingleProductCategoryModel;
 import com.example.freshup.R;
 import com.example.freshup.Util.App;
+import com.example.freshup.Util.CommonUtils;
 import com.example.freshup.ViewModels.ProductsViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -50,13 +51,15 @@ public class SubProductsActivity extends AppCompatActivity {
         products_title.setText(Common.GetToken(this,"products title"+category_id));
         viewModel= ViewModelProviders.of(this).get(ProductsViewModel.class);
         user_id=Common.GetToken(this,"ID");
-
+        CommonUtils.showProgress(SubProductsActivity.this);
         viewModel.subProducts(this,category_id,user_id).observe(this, new Observer<SingleProductCategoryModel>() {
             @Override
             public void onChanged(@Nullable SingleProductCategoryModel singleProductCategoryModel) {
                 if (singleProductCategoryModel.getDetails().isEmpty()){
+                    CommonUtils.dismiss();
                     Toast.makeText(SubProductsActivity.this, "No data found ", Toast.LENGTH_SHORT).show();
                 }else {
+
                     Toast.makeText(SubProductsActivity.this, "Successfully fetched", Toast.LENGTH_SHORT).show();
 
                     for (int i=0;i<singleProductCategoryModel.getDetails().size();i++){
@@ -74,7 +77,7 @@ public class SubProductsActivity extends AppCompatActivity {
 
                     }
 
-
+                    CommonUtils.dismiss();
                 }
             }
         });

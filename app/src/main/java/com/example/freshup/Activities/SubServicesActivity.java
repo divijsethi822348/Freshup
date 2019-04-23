@@ -20,6 +20,7 @@ import com.example.freshup.Models.GetServicesDataModel;
 import com.example.freshup.R;
 import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.Util.App;
+import com.example.freshup.Util.CommonUtils;
 import com.example.freshup.ViewModels.ServicesViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -58,9 +59,7 @@ public class SubServicesActivity extends AppCompatActivity {
         title.setText(Common.GetToken(SubServicesActivity.this,"Service title"+service_id));
         Picasso.with(getApplicationContext()).load(Common.GetToken(SubServicesActivity.this,"Service background"+service_id)).into(background);
         Picasso.with(getApplicationContext()).load(Common.GetToken(SubServicesActivity.this,"Service image"+service_id)).into(main);
-//        Log.d("service_id", ""+service_id);
-//        Log.d("id",""+id);
-//        Log.d("title",Common.GetToken(SubServicesActivity.this,"Service title"+id));
+        CommonUtils.showProgress(SubServicesActivity.this);
         viewModel.subServices(this,service_id).observe(this, new Observer<GetServicesDataModel>() {
             @Override
             public void onChanged(@Nullable GetServicesDataModel getServicesDataModel) {
@@ -78,7 +77,7 @@ public class SubServicesActivity extends AppCompatActivity {
 
                }
                services_type.setAdapter(new ServicesTypeAdapter(SubServicesActivity.this,list));
-
+                CommonUtils.dismiss();
 
             }
         });

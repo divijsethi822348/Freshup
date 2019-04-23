@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.freshup.SharedPrefrences.Common;
 import com.example.freshup.Models.RegisterModel;
 import com.example.freshup.R;
+import com.example.freshup.Util.CommonUtils;
 import com.example.freshup.ViewModels.UserRegisterViewModel;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -48,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void submit() {
+
         Name=name.getText().toString();
         Email=email.getText().toString();
         Number=number.getText().toString();
@@ -67,6 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
         else
             {
            if (Confirm.equals(password.getText().toString())){
+               CommonUtils.showProgress(SignUpActivity.this);
                viewModel.userRegister(SignUpActivity.this,Name,Email,Number,Password,"Android","0").observe(this, new Observer<RegisterModel>() {
                    @Override
                    public void onChanged(@Nullable RegisterModel registerModel) {
@@ -75,8 +78,10 @@ public class SignUpActivity extends AppCompatActivity {
                            Toast.makeText(SignUpActivity.this, "Otp is "+registerModel.getDetails().getOtp(), Toast.LENGTH_LONG).show();
                            Intent intent=new Intent(SignUpActivity.this, OtpVerification.class);
                            startActivity(intent);
+                           CommonUtils.dismiss();
                        }
                        else if (registerModel.getSuccess().equalsIgnoreCase("0")){
+                           CommonUtils.dismiss();
                            Toast.makeText(SignUpActivity.this, "These Credentials already exist", Toast.LENGTH_SHORT).show();
                        }
                    }

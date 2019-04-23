@@ -41,7 +41,6 @@ public class ServicesTypeExpandedAdapter extends RecyclerView.Adapter<ServicesTy
         myViewHolder.sub_sub_service_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (status==false){
                     myViewHolder.radio.setImageResource(R.drawable.ic_radio_on_button);
                     status=true;
