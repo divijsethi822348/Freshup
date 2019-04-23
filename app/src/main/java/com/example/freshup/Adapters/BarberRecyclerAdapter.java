@@ -37,7 +37,6 @@ public class BarberRecyclerAdapter extends RecyclerView.Adapter<BarberRecyclerAd
 
 
     public BarberRecyclerAdapter(Context context, List<BarberDetailsModel> list1,String dateData,String day) {
-//        list.clear();
         if (list!=null){
             list.clear();
         }

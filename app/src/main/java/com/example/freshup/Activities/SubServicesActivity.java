@@ -59,10 +59,11 @@ public class SubServicesActivity extends AppCompatActivity {
         title.setText(Common.GetToken(SubServicesActivity.this,"Service title"+service_id));
         Picasso.with(getApplicationContext()).load(Common.GetToken(SubServicesActivity.this,"Service background"+service_id)).into(background);
         Picasso.with(getApplicationContext()).load(Common.GetToken(SubServicesActivity.this,"Service image"+service_id)).into(main);
-        CommonUtils.showProgress(SubServicesActivity.this);
+
         viewModel.subServices(this,service_id).observe(this, new Observer<GetServicesDataModel>() {
             @Override
             public void onChanged(@Nullable GetServicesDataModel getServicesDataModel) {
+                CommonUtils.showProgress(SubServicesActivity.this);
                 Toast.makeText(SubServicesActivity.this, "Successfully fetched: "+getServicesDataModel.getMessage(), Toast.LENGTH_SHORT).show();
                for (int i=0;i<getServicesDataModel.getDetails().size();i++){
                    GetServicesDataModel model=new GetServicesDataModel();

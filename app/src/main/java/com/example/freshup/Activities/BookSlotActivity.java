@@ -72,20 +72,6 @@ public class BookSlotActivity extends AppCompatActivity {
         title = findViewById(R.id.book_Slot_title);
         barber_recycler.setLayoutManager(new LinearLayoutManager(this));
 
-//        boolean isLollipop = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
-//        int marvel_1 = isLollipop ? R.drawable.marvel_1_lollipop : R.drawable.marvel_1;
-//        int marvel_2 = isLollipop ? R.drawable.marvel_2_lollipop : R.drawable.marvel_2;
-//        int marvel_3 = isLollipop ? R.drawable.marvel_3_lollipop : R.drawable.marvel_3;
-//        int marvel_4 = isLollipop ? R.drawable.marvel_4_lollipop : R.drawable.marvel_4;
-//        loadingView.addAnimation(Color.parseColor("#FFD200"), marvel_1,
-//                LoadingView.FROM_LEFT);
-//        loadingView.addAnimation(Color.parseColor("#2F5DA9"), marvel_2,
-//                LoadingView.FROM_TOP);
-//        loadingView.addAnimation(Color.parseColor("#FF4218"), marvel_3,
-//                LoadingView.FROM_RIGHT);
-//        loadingView.addAnimation(Color.parseColor("#C7E7FB"), marvel_4,
-//                LoadingView.FROM_BOTTOM);
-
         cal = Calendar.getInstance();
         sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf1 = new SimpleDateFormat("EEEE MMMM dd, yyyy");
@@ -174,7 +160,6 @@ public class BookSlotActivity extends AppCompatActivity {
                         list.add(model);
                         String date = getDate.getText().toString();
                         day1 = date.split(" ");
-                        list.clear();
                     }
                     BarberRecyclerAdapter adapter = new BarberRecyclerAdapter(BookSlotActivity.this, list, datedata, day1[0]);
                     adapter.notifyDataSetChanged();
