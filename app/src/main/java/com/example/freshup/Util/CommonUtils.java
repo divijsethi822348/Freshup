@@ -20,7 +20,7 @@ public class CommonUtils {
         if (!(activity).isFinishing()) {
             if (progressDialog == null) {
                 progressDialog = new Dialog(activity);
-                progressDialog.setContentView(R.layout.progress_loader);
+                progressDialog.setContentView(R.layout.progress_bar);
                 progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 Window dialogWindow = progressDialog.getWindow();
                 dialogWindow.setGravity(Gravity.CENTER);

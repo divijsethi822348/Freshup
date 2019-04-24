@@ -10,6 +10,7 @@ import com.example.freshup.Retrofit.Api;
 import com.example.freshup.Retrofit.ApiClient;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.Models.SingleProductCategoryModel;
+import com.example.freshup.Util.CommonUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,11 +22,12 @@ public class ProductsViewModel extends ViewModel {
 
     public LiveData<GetHomeDataModel> products(final Activity activity){
         products=new MutableLiveData<>();
-
+        CommonUtils.showProgress(activity);
         Api api= ApiClient.getApiClient().create(Api.class);
         api.getProduct().enqueue(new Callback<GetHomeDataModel>() {
             @Override
             public void onResponse(Call<GetHomeDataModel> call, Response<GetHomeDataModel> response) {
+                CommonUtils.dismiss();
                 if (response.body().getSuccess().equalsIgnoreCase("1")){
                     products.setValue(response.body());
                 }
@@ -33,6 +35,7 @@ public class ProductsViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<GetHomeDataModel> call, Throwable t) {
+                CommonUtils.dismiss();
                 Toast.makeText(activity, "Error loading products", Toast.LENGTH_SHORT).show();
             }
         });
@@ -42,11 +45,12 @@ public class ProductsViewModel extends ViewModel {
 
     public LiveData<SingleProductCategoryModel> subProducts(final Activity activity,String categoryId,String userId){
         subproducts=new MutableLiveData<>();
-
+        CommonUtils.showProgress(activity);
         Api api=ApiClient.getApiClient().create(Api.class);
         api.getProducts(categoryId,userId).enqueue(new Callback<SingleProductCategoryModel>() {
             @Override
             public void onResponse(Call<SingleProductCategoryModel> call, Response<SingleProductCategoryModel> response) {
+                CommonUtils.dismiss();
                 if (response.body().getSuccess().equalsIgnoreCase("1")){
                     subproducts.setValue(response.body());
                 }else if (response.body().getSuccess().equalsIgnoreCase("0")){
@@ -56,6 +60,7 @@ public class ProductsViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<SingleProductCategoryModel> call, Throwable t) {
+                CommonUtils.dismiss();
                 Toast.makeText(activity, "error: "+t.toString(), Toast.LENGTH_SHORT).show();
             }
         });

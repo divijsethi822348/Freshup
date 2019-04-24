@@ -64,7 +64,6 @@ public class SubSubProductActivity extends AppCompatActivity {
         }, new SubSubProductsRecyclerAdapter.Add_To_Cart_Click() {
             @Override
             public void choose(int position) {
-                CommonUtils.showProgress(SubSubProductActivity.this);
                 String userId=Common.GetToken(SubSubProductActivity.this,"ID");
                 String productId=App.getSingleton().getProductId();
 
@@ -72,7 +71,6 @@ public class SubSubProductActivity extends AppCompatActivity {
                         .observe(SubSubProductActivity.this, new Observer<AddToCartModel>() {
                             @Override
                             public void onChanged(@Nullable AddToCartModel addToCartModel) {
-                                CommonUtils.dismiss();
                                 Toast.makeText(SubSubProductActivity.this, "Total Price"+addToCartModel.getTotalPrice(), Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(SubSubProductActivity.this,NavigatorActivity.class);
                                 intent.putExtra("check",1);
@@ -83,10 +81,9 @@ public class SubSubProductActivity extends AppCompatActivity {
         },  new SubSubProductsRecyclerAdapter.GO_To_Cart_Click() {
             @Override
             public void choose() {
-                CommonUtils.showProgress(SubSubProductActivity.this);
+
                 Intent intent=new Intent(SubSubProductActivity.this,NavigatorActivity.class);
                 intent.putExtra("check",1);
-                CommonUtils.dismiss();
                 startActivity(intent);
 
             }

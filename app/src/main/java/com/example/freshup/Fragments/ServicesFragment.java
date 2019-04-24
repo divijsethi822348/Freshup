@@ -48,11 +48,10 @@ public class ServicesFragment extends Fragment {
         viewModel= ViewModelProviders.of(this).get(ServicesViewModel.class);
         servicesRecycler=view.findViewById(R.id.services_recycler_view);
         servicesRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        CommonUtils.showProgress(getActivity());
+
         viewModel.services(getActivity()).observe(getActivity(), new Observer<GetHomeDataModel>() {
             @Override
             public void onChanged(@Nullable GetHomeDataModel getHomeDataModel) {
-
                 int size=getHomeDataModel.getDetails().size();
                 for (int i=0;i<size;i++){
                     GetHomeDataModel model=new GetHomeDataModel();
@@ -68,7 +67,7 @@ public class ServicesFragment extends Fragment {
                     list.add(model);
                     servicesRecycler.setAdapter(new ServicesRecyclerAdapter(getContext(),list));
                 }
-                CommonUtils.dismiss();
+
 
             }
         });

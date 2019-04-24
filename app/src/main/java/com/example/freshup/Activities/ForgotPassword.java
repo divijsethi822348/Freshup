@@ -49,11 +49,11 @@ public class ForgotPassword extends AppCompatActivity {
     }
 
     private void forgot() {
-        CommonUtils.showProgress(ForgotPassword.this);
+
         viewModel.forgot(ForgotPassword.this,Email).observe(ForgotPassword.this, new Observer<Map>() {
             @Override
             public void onChanged(@Nullable Map map) {
-                CommonUtils.dismiss();
+
                 Toast.makeText(ForgotPassword.this, "Your Password sent to your mail ", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(ForgotPassword.this,LoginActivity.class);
                 startActivity(intent);

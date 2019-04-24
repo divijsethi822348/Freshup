@@ -10,6 +10,7 @@ import com.example.freshup.Retrofit.Api;
 import com.example.freshup.Retrofit.ApiClient;
 import com.example.freshup.Models.GetHomeDataModel;
 import com.example.freshup.Models.GetServicesDataModel;
+import com.example.freshup.Util.CommonUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,11 +22,12 @@ public class ServicesViewModel extends ViewModel {
 
     public LiveData<GetHomeDataModel> services(final Activity activity){
         services=new MutableLiveData<>();
-
+        CommonUtils.showProgress(activity);
         Api api= ApiClient.getApiClient().create(Api.class);
         api.getServices().enqueue(new Callback<GetHomeDataModel>() {
             @Override
             public void onResponse(Call<GetHomeDataModel> call, Response<GetHomeDataModel> response) {
+                CommonUtils.dismiss();
                 if (response.body().getSuccess().equalsIgnoreCase("1")){
                     services.setValue(response.body());
                 }
@@ -33,6 +35,7 @@ public class ServicesViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<GetHomeDataModel> call, Throwable t) {
+                CommonUtils.dismiss();
                 Toast.makeText(activity, "Failed to load services", Toast.LENGTH_SHORT).show();
             }
         });
@@ -44,10 +47,12 @@ public class ServicesViewModel extends ViewModel {
     public LiveData<GetServicesDataModel> subServices(final Activity activity,String id){
         subservices=new MutableLiveData<>();
 
+        CommonUtils.showProgress(activity);
         Api api=ApiClient.getApiClient().create(Api.class);
         api.getSubServices(id).enqueue(new Callback<GetServicesDataModel>() {
             @Override
             public void onResponse(Call<GetServicesDataModel> call, Response<GetServicesDataModel> response) {
+                CommonUtils.dismiss();
                 if (response.body().getSuccess().equalsIgnoreCase("1")){
                     subservices.setValue(response.body());
                 }else {
@@ -57,6 +62,7 @@ public class ServicesViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<GetServicesDataModel> call, Throwable t) {
+                CommonUtils.dismiss();
                 Toast.makeText(activity, "error :"+t.toString(), Toast.LENGTH_SHORT).show();
             }
         });

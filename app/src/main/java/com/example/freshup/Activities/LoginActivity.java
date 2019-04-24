@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signin() {
-        CommonUtils.showProgress(LoginActivity.this);
+
 
         viewModel.login(LoginActivity.this, Email, Password, "Android", "0").observe(LoginActivity.this, new Observer<GetProfilePojo>() {
             @Override
@@ -81,12 +81,11 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, NavigatorActivity.class);
                     intent.putExtra("check",0);
                     startActivity(intent);
-                    CommonUtils.dismiss();
+
                 } else if (getProfilePojo.getSuccess().equalsIgnoreCase("0")) {
-                    CommonUtils.dismiss();
                     Toast.makeText(LoginActivity.this, "Please Enter Valid Credentials", Toast.LENGTH_SHORT).show();
                 } else if (getProfilePojo.getSuccess().equalsIgnoreCase("2")) {
-                    CommonUtils.dismiss();
+
                     Toast.makeText(LoginActivity.this, "Please verify", Toast.LENGTH_SHORT).show();
                     Toast.makeText(LoginActivity.this, "Otp is: " + getProfilePojo.getDetails().getOtp(), Toast.LENGTH_SHORT).show();
                     Common.SaveToken(LoginActivity.this,"email",getProfilePojo.getDetails().getEmail());

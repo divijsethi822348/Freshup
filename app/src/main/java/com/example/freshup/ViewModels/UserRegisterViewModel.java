@@ -12,6 +12,7 @@ import com.example.freshup.Models.GetProfilePojo;
 import com.example.freshup.Models.OtpPojo;
 import com.example.freshup.Models.RegisterModel;
 import com.example.freshup.Models.SimplePojo;
+import com.example.freshup.Util.CommonUtils;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.Map;
@@ -34,18 +35,19 @@ public class UserRegisterViewModel extends ViewModel {
 
     public LiveData<RegisterModel> userRegister(final Activity activity, String name, String email, String phone, String password, String device_type, final String reg_id){
         userRegister=new MutableLiveData<>();
-
+        CommonUtils.showProgress(activity);
         Api api= ApiClient.getApiClient().create(Api.class);
         api.UserRegister(name,email,phone,password,device_type,reg_id).enqueue(new Callback<RegisterModel>() {
             @Override
             public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
-
+                CommonUtils.dismiss();
                     userRegister.setValue(response.body());
 
             }
 
             @Override
             public void onFailure(Call<RegisterModel> call, Throwable t) {
+                CommonUtils.dismiss();
                 Toast.makeText(activity, "Failed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -55,17 +57,19 @@ public class UserRegisterViewModel extends ViewModel {
 
     public LiveData<SimplePojo> verification(final Activity activity, String id, String otp){
         verification=new MutableLiveData<>();
-
+        CommonUtils.showProgress(activity);
         Api api=ApiClient.getApiClient().create(Api.class);
         api.matchToken(id,otp).enqueue(new Callback<SimplePojo>() {
             @Override
             public void onResponse(Call<SimplePojo> call, Response<SimplePojo> response) {
+                CommonUtils.dismiss();
                     verification.setValue(response.body());
 
             }
 
             @Override
             public void onFailure(Call<SimplePojo> call, Throwable t) {
+                CommonUtils.dismiss();
                 Toast.makeText(activity, "Failed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -74,17 +78,19 @@ public class UserRegisterViewModel extends ViewModel {
     }
     public LiveData<OtpPojo> resend(final Activity activity,String id){
         resend=new MutableLiveData<>();
+        CommonUtils.showProgress(activity);
         Api api=ApiClient.getApiClient().create(Api.class);
         api.resendToken(id).enqueue(new Callback<OtpPojo>() {
             @Override
             public void onResponse(Call<OtpPojo> call, Response<OtpPojo> response) {
+                CommonUtils.dismiss();
                 if (response.body().getSuccess().equalsIgnoreCase("1")){
                  resend.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<OtpPojo> call, Throwable t) {
+            public void onFailure(Call<OtpPojo> call, Throwable t) {CommonUtils.dismiss();
                 Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -93,17 +99,19 @@ public class UserRegisterViewModel extends ViewModel {
 
     public LiveData<GetProfilePojo> login(final Activity activity,String email, String password, String device_type, final String reg_id){
         login=new MutableLiveData<>();
-
+        CommonUtils.showProgress(activity);
         Api api=ApiClient.getApiClient().create(Api.class);
         api.UserLogin(email,password,device_type,reg_id).enqueue(new Callback<GetProfilePojo>() {
             @Override
             public void onResponse(Call<GetProfilePojo> call, Response<GetProfilePojo> response) {
+                CommonUtils.dismiss();
                     login.setValue(response.body());
 
             }
 
             @Override
             public void onFailure(Call<GetProfilePojo> call, Throwable t) {
+                CommonUtils.dismiss();
                 Toast.makeText(activity, "Failed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -112,11 +120,12 @@ public class UserRegisterViewModel extends ViewModel {
 
     public LiveData<GetProfilePojo> getProfile(final Activity activity,String id){
         get_profile=new MutableLiveData<>();
-
+        CommonUtils.showProgress(activity);
         Api api=ApiClient.getApiClient().create(Api.class);
         api.getProfile(id).enqueue(new Callback<GetProfilePojo>() {
             @Override
             public void onResponse(Call<GetProfilePojo> call, Response<GetProfilePojo> response) {
+                CommonUtils.dismiss();
                 if (response.body().getSuccess().equalsIgnoreCase("1")){
                     get_profile.setValue(response.body());
                 }
@@ -124,6 +133,7 @@ public class UserRegisterViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<GetProfilePojo> call, Throwable t) {
+                CommonUtils.dismiss();
                 Toast.makeText(activity, "Failed", Toast.LENGTH_SHORT).show();
 
             }
@@ -133,11 +143,12 @@ public class UserRegisterViewModel extends ViewModel {
 
     public LiveData<GetProfilePojo> updateProfile(final Activity activity,RequestBody userId, RequestBody name, RequestBody phone, MultipartBody.Part image){
         update_profile=new MutableLiveData<>();
-
+        CommonUtils.showProgress(activity);
         Api api=ApiClient.getApiClient().create(Api.class);
         api.updateProfile(userId,name,phone,image).enqueue(new Callback<GetProfilePojo>() {
             @Override
             public void onResponse(Call<GetProfilePojo> call, Response<GetProfilePojo> response) {
+                CommonUtils.dismiss();
                 if (response.body()!=null){
                     update_profile.setValue(response.body());
                 }
@@ -145,6 +156,7 @@ public class UserRegisterViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<GetProfilePojo> call, Throwable t) {
+                CommonUtils.dismiss();
                 Toast.makeText(activity, "Error :"+t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -152,11 +164,12 @@ public class UserRegisterViewModel extends ViewModel {
     }
     public LiveData<Map> forgot(final Activity activity,String email){
         forgot=new MutableLiveData<>();
-
+        CommonUtils.showProgress(activity);
         Api api=ApiClient.getApiClient().create(Api.class);
         api.forgetPassword(email).enqueue(new Callback<Map>() {
             @Override
             public void onResponse(Call<Map> call, Response<Map> response) {
+                CommonUtils.dismiss();
                 if (response.body()!=null){
                     String email=((LinkedTreeMap)response.body()).get("success").toString();
                     if (email.equalsIgnoreCase("0")){
@@ -169,6 +182,7 @@ public class UserRegisterViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<Map> call, Throwable t) {
+                CommonUtils.dismiss();
                 Toast.makeText(activity, "Failed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -178,11 +192,12 @@ public class UserRegisterViewModel extends ViewModel {
     public LiveData<Map> change_pass(final Activity activity,String id,String old,String new_pass){
 
         change=new MutableLiveData<>();
-
+        CommonUtils.showProgress(activity);
         Api api=ApiClient.getApiClient().create(Api.class);
         api.changePassword(id,old,new_pass).enqueue(new Callback<Map>() {
             @Override
             public void onResponse(Call<Map> call, Response<Map> response) {
+                CommonUtils.dismiss();
                 if (response.body()!=null){
                     String success=((LinkedTreeMap)response.body()).get("success").toString();
                     if (success.equalsIgnoreCase("0")){
@@ -197,6 +212,7 @@ public class UserRegisterViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<Map> call, Throwable t) {
+                CommonUtils.dismiss();
                 Toast.makeText(activity, "Error :"+t.toString(), Toast.LENGTH_SHORT).show();
             }
         });

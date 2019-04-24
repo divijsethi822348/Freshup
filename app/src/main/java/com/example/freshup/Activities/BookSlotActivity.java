@@ -134,7 +134,6 @@ public class BookSlotActivity extends AppCompatActivity {
     }
 
     public void getBarberDetails() {
-        CommonUtils.showProgress(BookSlotActivity.this);
         barber_recycler.setVisibility(View.VISIBLE);
         shop_close.setVisibility(View.GONE);
 
@@ -164,13 +163,11 @@ public class BookSlotActivity extends AppCompatActivity {
                     BarberRecyclerAdapter adapter = new BarberRecyclerAdapter(BookSlotActivity.this, list, datedata, day1[0]);
                     adapter.notifyDataSetChanged();
                     barber_recycler.setAdapter(adapter);
-                    CommonUtils.dismiss();
 
                 } else if (barberDetailsModel.getSuccess().equalsIgnoreCase("2")) {
                     list.clear();
                     barber_recycler.setVisibility(View.GONE);
                     shop_close.setVisibility(View.VISIBLE);
-                    CommonUtils.dismiss();
                 }
             }
         });

@@ -168,7 +168,6 @@ public class OtpVerification extends AppCompatActivity {
         id= Common.GetToken(OtpVerification.this,"ID");
         otp=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
         if (otp.length()==4){
-            CommonUtils.showProgress(OtpVerification.this);
             viewModel.verification(this,id,otp).observe(this, new Observer<SimplePojo>() {
                 @Override
                 public void onChanged(@Nullable SimplePojo simplePojo) {
@@ -181,9 +180,8 @@ public class OtpVerification extends AppCompatActivity {
                         popupWindow=new PopupWindow(view1, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
                         popupWindow.showAtLocation(layout, Gravity.CENTER,0,0);
-                        CommonUtils.dismiss();
+
                     }else if (simplePojo.getSuccess().equalsIgnoreCase("0")){
-                        CommonUtils.dismiss();
                         Toast.makeText(OtpVerification.this, "Otp does not match", Toast.LENGTH_SHORT).show();
                     }
                 }

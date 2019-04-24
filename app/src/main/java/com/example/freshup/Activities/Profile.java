@@ -78,13 +78,12 @@ public class Profile extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonUtils.showProgress(Profile.this);
                 Common.Logout(Profile.this);
                 Login_Logout.Logout(Profile.this);
                 App.getAppPreference().Logout(Profile.this);
                 Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(intent);
-                CommonUtils.dismiss();
+
             }
         });
         profileedit.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +133,7 @@ public class Profile extends AppCompatActivity {
     }
 
     private void updateProfile() {
-        CommonUtils.showProgress(Profile.this);
+
 
         if (path!=""){
             final File file=new File(path);
@@ -173,7 +172,7 @@ public class Profile extends AppCompatActivity {
                     profileedit.setVisibility(View.VISIBLE);
                     profilesave.setVisibility(View.GONE);
                     profilepic.setEnabled(false);
-                    CommonUtils.dismiss();
+
                     Toast.makeText(Profile.this, "Saved", Toast.LENGTH_SHORT).show();
                     picturePath="";
                     picturePath1="";
@@ -189,7 +188,6 @@ public class Profile extends AppCompatActivity {
     }
 
     private void getProfile() {
-        CommonUtils.showProgress(Profile.this);
         String id= Common.GetToken(this,"ID");
 
         viewModel.getProfile(Profile.this,id).observe(Profile.this, new Observer<GetProfilePojo>() {
@@ -200,13 +198,12 @@ public class Profile extends AppCompatActivity {
                 phone.setText(getProfilePojo.getDetails().getPhone());
 
                 if (getProfilePojo.getDetails().getImage().isEmpty()){
-                    CommonUtils.dismiss();
 
                     Toast.makeText(Profile.this, "Add your image", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Picasso.with(Profile.this).load(getProfilePojo.getDetails().getImage()).into(profile);
-                    CommonUtils.dismiss();
+
                 }
             }
         });

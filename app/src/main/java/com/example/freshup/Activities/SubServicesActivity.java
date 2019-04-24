@@ -63,7 +63,6 @@ public class SubServicesActivity extends AppCompatActivity {
         viewModel.subServices(this,service_id).observe(this, new Observer<GetServicesDataModel>() {
             @Override
             public void onChanged(@Nullable GetServicesDataModel getServicesDataModel) {
-                CommonUtils.showProgress(SubServicesActivity.this);
                 Toast.makeText(SubServicesActivity.this, "Successfully fetched: "+getServicesDataModel.getMessage(), Toast.LENGTH_SHORT).show();
                for (int i=0;i<getServicesDataModel.getDetails().size();i++){
                    GetServicesDataModel model=new GetServicesDataModel();
@@ -78,7 +77,7 @@ public class SubServicesActivity extends AppCompatActivity {
 
                }
                services_type.setAdapter(new ServicesTypeAdapter(SubServicesActivity.this,list));
-                CommonUtils.dismiss();
+
 
             }
         });

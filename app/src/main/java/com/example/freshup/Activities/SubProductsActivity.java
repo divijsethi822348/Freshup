@@ -51,12 +51,12 @@ public class SubProductsActivity extends AppCompatActivity {
         products_title.setText(Common.GetToken(this,"products title"+category_id));
         viewModel= ViewModelProviders.of(this).get(ProductsViewModel.class);
         user_id=Common.GetToken(this,"ID");
-        CommonUtils.showProgress(SubProductsActivity.this);
+
         viewModel.subProducts(this,category_id,user_id).observe(this, new Observer<SingleProductCategoryModel>() {
             @Override
             public void onChanged(@Nullable SingleProductCategoryModel singleProductCategoryModel) {
                 if (singleProductCategoryModel.getDetails().isEmpty()){
-                    CommonUtils.dismiss();
+
                     Toast.makeText(SubProductsActivity.this, "No data found ", Toast.LENGTH_SHORT).show();
                 }else {
 
@@ -77,7 +77,7 @@ public class SubProductsActivity extends AppCompatActivity {
 
                     }
 
-                    CommonUtils.dismiss();
+
                 }
             }
         });

@@ -76,7 +76,6 @@ public class CartFragment extends Fragment {
     }
 
     public void getData() {
-        CommonUtils.showProgress(getActivity());
         viewModel.getCartData(getActivity(), userId).observe(this, new Observer<GetAddToCartListModel>() {
             @Override
             public void onChanged(@Nullable final GetAddToCartListModel getAddToCartListModel) {
@@ -139,13 +138,11 @@ public class CartFragment extends Fragment {
                     });
                     adapter.notifyDataSetChanged();
                     cart_item_recycler.setAdapter(adapter);
-                    CommonUtils.dismiss();
 
 
                 } else if (getAddToCartListModel.getSuccess().equalsIgnoreCase("0")) {
                     cart_item_recycler.setVisibility(View.GONE);
                     cart_empty.setVisibility(View.VISIBLE);
-                    CommonUtils.dismiss();
                 }
             }
         });
